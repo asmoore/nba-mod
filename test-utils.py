@@ -1,19 +1,18 @@
-	
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
-test-nba-mod
+test-utils
 --------------
 
 Tests for `nba-mod.utils` module.
-"""
 
+"""
 import unittest
 
 import utils
 
-class NBAModTest(unittest.TestCase):
+class UtilsTest(unittest.TestCase):
     def test_get_team_subreddits(self):
     	utils.get_team_subreddits(3)
 
