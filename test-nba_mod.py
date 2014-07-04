@@ -16,6 +16,7 @@ class NBAModTest(unittest.TestCase):
     def test_create_sidebar(self):
     	nba_mod.create_sidebar()
 
+
     def test_update_sidebar(self):
     	nba_mod.update_sidebar("test","catmoon")
 

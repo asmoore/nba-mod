@@ -45,6 +45,7 @@ def create_sidebar():
 
     return sidebar
 
+
 def update_sidebar(sidebar_text,subreddit):
     """update the sidebar for /r/NBA. 
     

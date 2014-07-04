@@ -50,6 +50,7 @@ def get_team_subreddits(var_length):
         top_links = top_links+'|'+str(counter+1)+' ['+title+'](/r/'+subreddit+'/comments/'+name+')|\n'
     return top_links
 
+
 def get_schedule(var_length):
     """Return a markdown table of gamges.
 
@@ -85,6 +86,7 @@ def get_schedule(var_length):
                     schedule = schedule + re.sub(date.group(),datetime.datetime.strptime(date.group(), '%m/%d/%Y').strftime('%b. %d'),game) + "\n"
     #Returns as a string
     return schedule
+
 
 def get_game_threads():
     """Return a string list of current games.
@@ -159,6 +161,7 @@ def get_game_threads():
     scorebar = scorebar + "-|[**GAME THREAD GENERATOR**](http://nba-gamethread.herokuapp.com/)|\n\n"
     
     return scorebar
+
 
 def get_standings():
     """Return a string markdown table of standings pulled from ESPN.
