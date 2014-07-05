@@ -21,9 +21,7 @@ import praw
     
 def get_team_subreddits(var_length):
     """Return a markdown table of top team subreddit threads.
-    
-    Last revised on 08/03/13.
-    
+        
     """
     #Define the URL with var_length number of posts.
     url = "http://www.reddit.com/r/nyknicks+sixers+bostonceltics+gonets+torontoraptors+chicagobulls+mkebucks+clevelandcavs+indianapacers+detroitpistons+heat+atlantahawks+orlandomagic+charlottebobcats+washingtonwizards+timberwolves+thunder+ripcity+utahjazz+denvernuggets+warriors+laclippers+kings+suns+lakers+nbaspurs+mavericks+memphisgrizzlies+rockets+hornets/.json?limit=" + str(var_length)
@@ -53,8 +51,6 @@ def get_team_subreddits(var_length):
 
 def get_schedule(var_length):
     """Return a markdown table of gamges.
-
-    Last revised 09/14/2013
     
     """
     #Initiate PRAW
@@ -90,8 +86,6 @@ def get_schedule(var_length):
 
 def get_game_threads():
     """Return a string list of current games.
-
-    Last revised 09/15/2013
     
     """
     #Open score URL on ESPN
@@ -109,6 +103,11 @@ def get_game_threads():
     scores = re.sub("&","",scores)
     #Split the formatted scores into individual games
     all_games = re.split('nba_s_left',scores)
+
+    return all_games
+
+
+def create_scorebar(all_games):
     #Create scorebar
     scorebar = "||||||\n|:--|:--|:--|:--|:--|:--|\n|Game Threads|"
     #Initialize lists
@@ -165,8 +164,6 @@ def get_game_threads():
 
 def get_standings():
     """Return a string markdown table of standings pulled from ESPN.
-
-    Last revised 09/15/2013
     
     """
     #Initialize lists
@@ -254,8 +251,6 @@ def get_standings():
 
 def city_names_to_hrefs(var_string):
     """Replace city names in a string with team hrefs.
-
-    Last revised 09/15/2013
     
     """
     #Use the input variable to be modified
@@ -288,8 +283,6 @@ def city_names_to_hrefs(var_string):
 
 def city_names_to_subs(var_string):
     """Replace city names in a string with team subreddits.
-
-    Last revised 10/02/2013
     
     """
     #Use the input variable to be modified
