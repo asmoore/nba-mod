@@ -24,7 +24,8 @@ def create_sidebar():
     #Log in to Reddit using 
     r.login(os.environ.get('USER'),os.environ.get('PASS'))
     #Get the sidebar from the wiki
-    sidebar_md = r.get_subreddit('NBA').get_wiki_page('edit_sidebar').content_md
+    sidebar_md = r.get_subreddit('NBA_Mods').get_wiki_page('edit_sidebar').content_md
+    sidebar_md = sidebar_md.replace("&gt;", ">")
     #Split the sidebar by individual lines. Each line is a different game
     sidebar_list = sidebar_md.split('\n')
     sidebar = ""
@@ -39,6 +40,9 @@ def create_sidebar():
             elif line.startswith("$game_threads"):
                 all_games = utils.get_game_threads()
                 sidebar = sidebar + utils.create_scorebar(all_games)
+            elif line.startswith("$game_thread_bar"):
+                all_games = utils.get_game_threads()
+                sidebar = sidebar + utils.create_game_thread_bar(all_games)
             elif line.startswith("$standings"):
                 sidebar = sidebar + utils.get_standings()
             else:

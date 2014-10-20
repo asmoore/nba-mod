@@ -83,6 +83,26 @@ def get_schedule(var_length):
     #Returns as a string
     return schedule
 
+def get_schedule_nba():
+    """Gets the schedule from nba.com
+
+    """
+    response = urllib2.urlopen('http://data.nba.com/5s/json/cms/noseason/scoreboard/'+datetime.now(pytz.timezone('US/Pacific')).strftime("%Y%m%d")+'/games.json')
+    jdata = json.load(response)
+    games = jdata['sports_content']['games']['game']
+    schedule = []
+    time = str(datetime.now())
+    for game in games:
+        home=game['home']['city']
+        visitor=game['visitor']['city']
+        game_id=game['id']
+        date=game['home_start_date']
+        date_obj = datetime.strptime(date, "%Y%m%d")
+        date_formatted = date_obj.strftime("%b. %d, %Y")
+        title = "GAME THREAD: " + visitor + " @ " + home + " - (" + date_formatted + ")"
+        schedule.append(Game(date,game_id,home,visitor,title))
+
+    return schedule
 
 def get_game_threads():
     """Return a string list of current games.
@@ -105,7 +125,6 @@ def get_game_threads():
     all_games = re.split('nba_s_left',scores)
 
     return all_games
-
 
 def create_scorebar(all_games):
     #Create scorebar
@@ -161,6 +180,66 @@ def create_scorebar(all_games):
     
     return scorebar
 
+
+def create_game_thread_bar(all_games):
+    """Return a string list of current games.
+    
+    """
+    #Create scorebar
+    scorebar = ""
+    #Initialize lists
+    list_scorebar = [];
+    list_pattern = [];
+    #Go through each game
+    for game in all_games:
+        #If "@" isn't in the game then this is extra info on ESPN
+        if re.search("@", game):
+            #Format game to create a REGEX pattern to search /r/NBA threads with
+            game_formatted = re.split("nba",game)[0]
+            game_formatted = game_formatted.lstrip('1')
+            list_scorebar.append(game_formatted)
+            game_formatted = re.sub("\\(.+?\\)","",game_formatted)
+            game_formatted = re.sub("[0-9]","",game_formatted)
+            game_formatted = re.sub(" @ ", ".*", game_formatted)
+            game_formatted = re.sub(" \.\*", ".*", game_formatted)
+            game_formatted = game_formatted.rstrip()
+            game_formatted = game_formatted.replace("LA Clippers","Los Angeles Clippers")
+            game_formatted = game_formatted.replace("LA Lakers","Los Angeles Lakers")
+            #add to list_pattern
+            list_pattern.append(game_formatted)
+    #Initialize PRAW
+    r = praw.Reddit(user_agent='NBA_MOD using praw')
+    #Login using the NBAModBot password
+    r.login(os.environ.get('USER'),os.environ.get('PASS'))
+    #Get top 100 submissions from /r/NBA. In high traffic this may need to be increased.
+    submissions = r.get_subreddit('nba').get_hot(limit=100)
+    #Create lists
+    game_thread_title = [];
+    game_thread_link = [];
+            
+    for submission in submissions:
+        story = submission.title.encode("utf8")
+        link = submission.permalink
+        if re.search('GAME THREAD',str(story),re.IGNORECASE):
+            game_thread_title.append(str(story))
+            temp_game_thread = re.search('/r/nba/comments/[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]/',submission.permalink)
+            game_thread_link.append(str(temp_game_thread.group()))
+            
+    for i in range(0, len(list_pattern)):
+        temp = '> * ' + list_scorebar[i] + '\n'
+        temp = temp.replace(" @ ", " ")
+        for j in range(0, len(game_thread_title)):
+            if re.search(list_pattern[i], game_thread_title[j]):
+                temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j]+')'+'\n'
+                temp = temp.replace(" (", " [(")
+                temp = temp.replace(" @ ", " ")
+                
+        scorebar = scorebar + temp
+    #Replace the city names with hrefs (e.g. "Miami" to "[](/MIA)")
+    scorebar = city_names_to_code(scorebar)
+    print scorebar
+
+    return scorebar
 
 def get_standings():
     """Return a string markdown table of standings pulled from ESPN.
@@ -273,6 +352,38 @@ def city_names_to_hrefs(var_string):
              '[](/LAL)','[](/PHX)','[](/SAC)','[](/DAL)','[](/HOU)',
              '[](/MEM)','[](/NOP)','[](/SAS)','[](/DEN)','[](/MIN)',
              '[](/OKC)','[](/POR)','[](/PHI)','[](/UTA)'
+             ]
+    #Go through the lists
+    for city,href in zip(city_names,hrefs):
+        #Replace all of the city names with hrefs
+        city_names_to_hrefs = city_names_to_hrefs.replace(city,href)
+    return city_names_to_hrefs
+
+
+def city_names_to_code(var_string):
+    """Replace city names in a string with team hrefs.
+    
+    """
+    #Use the input variable to be modified
+    city_names_to_hrefs = var_string
+
+    #List of NBA city names
+    city_names = ['Boston','Brooklyn','New York','Philadelphia','Toronto',
+                  'Chicago','Cleveland','Detroit','Indiana','Milwaukee',
+                  'Atlanta','Charlotte','Miami','Orlando','Washington',
+                  'Golden State','Golden St','LA Clippers','LA Lakers','Los Angeles Clippers',
+                  'Los Angeles Lakers','Phoenix','Sacramento','Dallas','Houston',
+                  'Memphis','New Orleans','San Antonio','Denver','Minnesota',
+                  'Oklahoma City','Portland','Philadelphia','Utah'
+                  ]
+    #Corresponding list of hrefs
+    hrefs = ['**BOS**','**BKN**','**NYK**','**PHI**','**TOR**',
+             '**CHI**','**CLE**','**DET**','**IND**','**MIL**',
+             '**ATL**','**CHA**','**MIA**','**ORL**','**WAS**',
+             '**GSW**','**GSW**','**LAC**','**LAL**','**LAC**',
+             '**LAL**','**PHX**','**SAC**','**DAL**','**HOU**',
+             '**MEM**','**NOP**','**SAS**','**DEN**','**MIN**',
+             '**OKC**','**POR**','**PHI**','**UTA**'
              ]
     #Go through the lists
     for city,href in zip(city_names,hrefs):
