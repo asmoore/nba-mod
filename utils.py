@@ -230,7 +230,7 @@ def create_game_thread_bar(all_games):
             
     for i in range(0, len(list_pattern)):
         temp = '> * ' + list_scorebar[i] + '\n'
-        temp = temp.replace("[", "")
+        temp = temp.replace("(", "")
         for j in range(0, len(game_thread_title)):
             if re.search(list_pattern[i], game_thread_title[j]):
                 temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j]+')'+'\n'
