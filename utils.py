@@ -56,7 +56,7 @@ def get_schedule(var_length):
     #Initiate PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Log in to Reddit using 
-    r.login(os.environ.get('USER'),os.environ.get('PASS'))
+    r.login(os.environ['USER'],os.environ['PASS'])
     #Get the schedule from the wiki
     schedule_md = r.get_subreddit('NBA').get_wiki_page('schedule_2013_2014_preseason').content_md
     #Split the schedule by individual lines. Each line is a different game
@@ -152,7 +152,7 @@ def create_scorebar(all_games):
     #Initialize PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Login using the NBAModBot password
-    r.login(os.environ.get('USER'),os.environ.get('PASS'))
+    r.login(os.environ['USER'],os.environ['PASS'])
     #Get top 100 submissions from /r/NBA. In high traffic this may need to be increased.
     submissions = r.get_subreddit('nba').get_hot(limit=100)
     #Create lists
@@ -213,7 +213,7 @@ def create_game_thread_bar(all_games):
     #Initialize PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Login using the NBAModBot password
-    r.login(os.environ.get('USER'),os.environ.get('PASS'))
+    r.login(os.environ['USER'],os.environ['PASS'])
     #Get top 100 submissions from /r/NBA. In high traffic this may need to be increased.
     submissions = r.get_subreddit('nba').get_hot(limit=100)
     #Create lists

@@ -22,7 +22,7 @@ def create_sidebar():
     #Initiate PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Log in to Reddit using 
-    r.login(os.environ.get('USER'),os.environ.get('PASS'))
+    r.login(os.environ['USER'],os.environ['PASS'])
     #Get the sidebar from the wiki
     sidebar_md = r.get_subreddit('NBA_Mods').get_wiki_page('edit_sidebar').content_md
     sidebar_md = sidebar_md.replace("&gt;", ">")
@@ -58,7 +58,7 @@ def update_sidebar(sidebar_text,subreddit):
     #Initiate PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Log in to Reddit using 
-    r.login(os.environ.get('USER'),os.environ.get('PASS'))
+    r.login(os.environ['USER'],os.environ['PASS'])
     #Get the subreddit's settings
     settings = r.get_subreddit(subreddit).get_settings()
     #Set the description of the sidebar to sidebar_text
