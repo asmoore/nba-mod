@@ -197,7 +197,7 @@ def create_game_thread_bar(all_games):
             #Format game to create a REGEX pattern to search /r/NBA threads with
             game_formatted = re.split("nba",game)[0]
             game_formatted = game_formatted.lstrip('1')
-            game_formatted1 = game_formatted.replace("(", "")
+            game_formatted1 = game_formatted.replace("[", "")
             game_formatted1 = game_formatted1.replace(")", "")
             game_formatted1 = game_formatted1.replace(" ET", "")
             list_scorebar.append(game_formatted1)
@@ -230,10 +230,10 @@ def create_game_thread_bar(all_games):
             
     for i in range(0, len(list_pattern)):
         temp = '> * ' + list_scorebar[i] + '\n'
+        temp = temp.replace("[", "")
         for j in range(0, len(game_thread_title)):
             if re.search(list_pattern[i], game_thread_title[j]):
                 temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j]+')'+'\n'
-                temp = temp.replace(" (", " [(")
         temp = temp.replace(" @ ", " ")
         temp = temp.replace(" - ", "-")
         scorebar = scorebar + temp
