@@ -237,6 +237,7 @@ def create_game_thread_bar(all_games):
                 temp = temp.replace(" (", " [")
         temp = temp.replace(" @ ", " ")
         temp = temp.replace(" - ", "-")
+        temp = temp.replace(" IN ", " ")
         scorebar = scorebar + temp
     #Replace the city names with hrefs (e.g. "Miami" to "[](/MIA)")
     scorebar = city_names_to_code(scorebar)
