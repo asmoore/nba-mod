@@ -24,7 +24,7 @@ def create_sidebar():
     #Log in to Reddit using 
     r.login(os.environ['USER'],os.environ['PASS'])
     #Get the sidebar from the wiki
-    sidebar_md = r.get_subreddit('NBA_Mods').get_wiki_page('edit_sidebar').content_md
+    sidebar_md = r.get_subreddit('NBA').get_wiki_page('edit_sidebar').content_md
     sidebar_md = sidebar_md.replace("&gt;", ">")
     #Split the sidebar by individual lines. Each line is a different game
     sidebar_list = sidebar_md.split('\n')

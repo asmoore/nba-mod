@@ -17,7 +17,7 @@ def update_nba_sidebar():
     #Create the the sidebar text using nba_mod
     sidebar_text = nba_mod.create_sidebar()
     #Update the sidebar of /r/NBA
-    nba_mod.update_sidebar(sidebar_text,'NBA_Mods')
+    nba_mod.update_sidebar(sidebar_text,'NBA')
 
 
 #Execute the main function
