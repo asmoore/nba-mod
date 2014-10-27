@@ -36,7 +36,7 @@ def create_sidebar():
             elif line.startswith("$team_subreddits"):
                 sidebar = sidebar + utils.get_team_subreddits(5)
             elif line.startswith("$schedule"):
-                sidebar = sidebar + utils.get_schedule(3)
+                sidebar = sidebar + utils.get_schedule(2)
             elif line.startswith("$game_threads"):
                 all_games = utils.get_game_threads()
                 sidebar = sidebar + utils.create_scorebar(all_games)
