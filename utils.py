@@ -24,7 +24,7 @@ def get_team_subreddits(var_length):
         
     """
     #Define the URL with var_length number of posts.
-    url = "http://www.reddit.com/r/nyknicks+sixers+bostonceltics+gonets+torontoraptors+chicagobulls+mkebucks+clevelandcavs+indianapacers+detroitpistons+heat+atlantahawks+orlandomagic+charlottebobcats+washingtonwizards+timberwolves+thunder+ripcity+utahjazz+denvernuggets+warriors+laclippers+kings+suns+lakers+nbaspurs+mavericks+memphisgrizzlies+rockets+hornets/.json?limit=" + str(var_length)
+    url = "http://www.reddit.com/r/nyknicks+sixers+bostonceltics+gonets+torontoraptors+chicagobulls+mkebucks+clevelandcavs+indianapacers+detroitpistons+heat+atlantahawks+orlandomagic+charlottehornets+washingtonwizards+timberwolves+thunder+ripcity+utahjazz+denvernuggets+warriors+laclippers+kings+suns+lakers+nbaspurs+mavericks+memphisgrizzlies+rockets+hornets/.json?limit=" + str(var_length)
     #Define headers for Reddit API request.
     headers = { 'User-Agent' : '/r/nba subreddits /u/NBA_Mod' }
     #Request the URL.
@@ -420,7 +420,7 @@ def city_names_to_subs(var_string):
     #Corresponding list of subs
     subs = ['bostonceltics','gonets','nyknicks','sixers','torontoraptors',
              'chicagobulls','clevelandcavs','detroitpistons','indianapacers','mkebucks',
-             'atlantahawks','charlottebobcats','heat','orlandomagic','washingtonwizards',
+             'atlantahawks','charlottehornets','heat','orlandomagic','washingtonwizards',
              'warriors','warriors','laclippers','lakers','laclippers',
              'lakers','suns','kings','mavericks','rockets',
              'memphisgrizzlies','nolapelicans','nbaspurs','denvernuggets','timberwolves',
