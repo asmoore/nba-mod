@@ -17,8 +17,9 @@ class UtilsTest(unittest.TestCase):
     #	utils.get_team_subreddits(3)
 
 
-    #def test_get_schedule(self):
-    #	utils.get_schedule(3)
+    def test_get_schedule(self):
+    	schedule =utils.get_schedule(3)
+        print schedule
     
 
     #def test_get_game_threads(self):
@@ -28,6 +29,7 @@ class UtilsTest(unittest.TestCase):
     def test_get_standings(self):
     	standings = utils.get_standings()
     	print standings
+
 
 if __name__ == '__main__':
     unittest.main()

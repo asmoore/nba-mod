@@ -58,7 +58,7 @@ def get_schedule(var_length):
     #Log in to Reddit using 
     r.login(os.environ['USER'],os.environ['PASS'])
     #Get the schedule from the wiki
-    schedule_md = r.get_subreddit('NBA').get_wiki_page('schedule_2013_2014_preseason').content_md
+    schedule_md = r.get_subreddit('NBA').get_wiki_page('schedule_2014-2015').content_md
     #Split the schedule by individual lines. Each line is a different game
     games = schedule_md.split('\n')
     #Add the header to the schedule table 
@@ -287,9 +287,15 @@ def get_standings():
 
     #Create markdown table split into two tables (EAST, WEST)
     for j in range(0,15):
-        wpct = float(W_list[j])/(float(W_list[j])+float(L_list[j]))
+        if(float(W_list[j])+float(L_list[j])>0):
+            wpct = float(W_list[j])/(float(W_list[j])+float(L_list[j]))
+        else:
+            wpct = 0;
         east.append({'team':team_list[j],'W':W_list[j],'L':L_list[j],'wpct':wpct})
-        wpct = float(W_list[j+15])/(float(W_list[j+15])+float(L_list[j+15]))
+        if(float(W_list[j+15])+float(L_list[j+15])>0):
+            wpct = float(W_list[j+15])/(float(W_list[j+15])+float(L_list[j+15]))
+        else:
+            wpct=0;
         west.append({'team':team_list[j+15],'W':W_list[j+15],'L':L_list[j+15],'wpct':wpct})
 
     east_sorted = newlist = sorted(east, key=itemgetter('wpct'),reverse=True)
