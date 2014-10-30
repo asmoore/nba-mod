@@ -165,14 +165,13 @@ def create_scorebar(all_games):
         if re.search('GAME THREAD',str(story),re.IGNORECASE):
             game_thread_title.append(str(story))
             temp_game_thread = re.search('/r/nba/comments/[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]/',submission.permalink)
-            temp_game_thread = temp_game_thread.replace('/r/nba/comments','')
             game_thread_link.append(str(temp_game_thread.group()))
             
     for i in range(0, len(list_pattern)):
         temp = '* ' + list_scorebar[i] + '\n';
         for j in range(0, len(game_thread_title)):
             if re.search(list_pattern[i], game_thread_title[j]):
-                temp = '* ' + list_scorebar[i]+']('+game_thread_link[j]+')|'
+                temp = '* ' + list_scorebar[i]+']('+game_thread_link[j].replace('/r/nba/comments/')+')|'
         scorebar = scorebar + temp
     #Replace the city names with hrefs (e.g. "Miami" to "[](/MIA)")
     scorebar = city_names_to_subs(scorebar)
@@ -227,7 +226,6 @@ def create_game_thread_bar(all_games):
         if re.search('GAME THREAD',str(story),re.IGNORECASE):
             game_thread_title.append(str(story))
             temp_game_thread = re.search('/r/nba/comments/[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]/',submission.permalink)
-            temp_game_thread = temp_game_thread.replace('/r/nba/comments','')
             game_thread_link.append(str(temp_game_thread.group()))
             
     for i in range(0, len(list_pattern)):
@@ -235,7 +233,7 @@ def create_game_thread_bar(all_games):
         temp = temp.replace("(", "")
         for j in range(0, len(game_thread_title)):
             if re.search(list_pattern[i], game_thread_title[j]):
-                temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j]+')'+'\n'
+                temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j].replace('/r/nba/comments/')+')'+'\n'
                 temp = temp.replace(" (", " [")
         temp = temp.replace(" @ ", " ")
         temp = temp.replace(" - ", "-")
