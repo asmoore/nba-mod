@@ -44,7 +44,7 @@ def create_sidebar():
                 all_games = utils.get_game_threads()
                 sidebar = sidebar + utils.create_game_thread_bar(all_games)
             elif line.startswith("$standings"):
-                sidebar = sidebar + utils.get_standings()
+                sidebar = sidebar + utils.get_standings_nba()
             else:
                 sidebar = sidebar + line
 

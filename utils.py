@@ -336,6 +336,34 @@ def get_standings():
     standings = standings + "\n\n"
     return standings
 
+def get_standings_nba():
+    url = "http://data.nba.com/json/cms/2014/standings/conference.json"
+    req = urllib2.urlopen(url).read()
+    obs = json.loads(req)
+    obs["sports_content"]["standings"]["conferences"]["East"]["team"][11]["team_stats"]["rank"]
+
+    standings = """|EAST|||WEST|||
+    |:---:|:---:|:---:|:---:|:---:|:---:|
+    |**TEAM**|*W/L*|*GB*|**TEAM**|*W/L*|*GB*|
+    """
+
+    for i in range(0,15):
+        east = obs["sports_content"]["standings"]["conferences"]["East"]["team"][i]
+        east_name = east["abbreviation"]
+        east_record = east["team_stats"]["wins"] + "-" + east["team_stats"]["losses"]
+        east_gb_conf = east["team_stats"]["gb_conf"]
+        west = obs["sports_content"]["standings"]["conferences"]["West"]["team"][i]
+        west_name = west["abbreviation"]
+        west_record = west["team_stats"]["wins"] + "-" + west["team_stats"]["losses"]
+        west_gb_conf = west["team_stats"]["gb_conf"]
+        if i < 8:
+            standings = standings + "|" + str(i+1) + " [](/" + east_name + ")| " + east_record + " | " + east_gb_conf + "|" + str(i+1) + " [](/" + west_name + ")| " + west_record + " | " + west_gb_conf + " |\n"
+        else:
+            standings = standings + "|[](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |[](/" + west_name + ")| " + west_record + " | " + west_gb_conf + " |\n"
+            
+    return standings
+
+
 
 def city_names_to_hrefs(var_string):
     """Replace city names in a string with team hrefs.
