@@ -171,7 +171,7 @@ def create_scorebar(all_games):
         temp = '* ' + list_scorebar[i] + '\n';
         for j in range(0, len(game_thread_title)):
             if re.search(list_pattern[i], game_thread_title[j]):
-                temp = '* ' + list_scorebar[i]+']('+game_thread_link[j].replace('/r/nba/comments/')+')|'
+                temp = '* ' + list_scorebar[i]+']('+game_thread_link[j].replace('/r/nba/comments/','')+')|'
         scorebar = scorebar + temp
     #Replace the city names with hrefs (e.g. "Miami" to "[](/MIA)")
     scorebar = city_names_to_subs(scorebar)
@@ -233,7 +233,7 @@ def create_game_thread_bar(all_games):
         temp = temp.replace("(", "")
         for j in range(0, len(game_thread_title)):
             if re.search(list_pattern[i], game_thread_title[j]):
-                temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j].replace('/r/nba/comments/')+')'+'\n'
+                temp = '> * ' + list_scorebar[i]+']('+game_thread_link[j].replace('/r/nba/comments/','')+')'+'\n'
                 temp = temp.replace(" (", " [")
         temp = temp.replace(" @ ", " ")
         temp = temp.replace(" - ", "-")
