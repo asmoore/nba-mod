@@ -343,9 +343,9 @@ def get_standings_nba():
     obs["sports_content"]["standings"]["conferences"]["East"]["team"][11]["team_stats"]["rank"]
 
     standings = """|EAST|||WEST|||
-    |:---:|:---:|:---:|:---:|:---:|:---:|
-    |**TEAM**|*W/L*|*GB*|**TEAM**|*W/L*|*GB*|
-    """
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|**TEAM**|*W/L*|*GB*|**TEAM**|*W/L*|*GB*|
+"""
 
     for i in range(0,15):
         east = obs["sports_content"]["standings"]["conferences"]["East"]["team"][i]
