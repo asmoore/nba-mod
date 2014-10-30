@@ -165,7 +165,7 @@ def create_scorebar(all_games):
         if re.search('GAME THREAD',str(story),re.IGNORECASE):
             game_thread_title.append(str(story))
             temp_game_thread = re.search('/r/nba/comments/[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]/',submission.permalink)
-            temp_game_thread = re.sub('/r/nba/comments','', temp_game_thread)
+            temp_game_thread = temp_game_thread.replace('/r/nba/comments','')
             game_thread_link.append(str(temp_game_thread.group()))
             
     for i in range(0, len(list_pattern)):
@@ -227,7 +227,7 @@ def create_game_thread_bar(all_games):
         if re.search('GAME THREAD',str(story),re.IGNORECASE):
             game_thread_title.append(str(story))
             temp_game_thread = re.search('/r/nba/comments/[0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z][0-9A-Za-z]/',submission.permalink)
-            temp_game_thread = re.sub('/r/nba/comments','', temp_game_thread)
+            temp_game_thread = temp_game_thread.replace('/r/nba/comments','')
             game_thread_link.append(str(temp_game_thread.group()))
             
     for i in range(0, len(list_pattern)):
