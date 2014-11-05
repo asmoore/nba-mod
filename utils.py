@@ -246,10 +246,11 @@ def create_game_thread_bar(all_games):
 
 
 def get_standings_nba():
+    """Get standings from data.nba.com """
+    
     url = "http://data.nba.com/json/cms/2014/standings/conference.json"
     req = urllib2.urlopen(url).read()
     obs = json.loads(req)
-    obs["sports_content"]["standings"]["conferences"]["East"]["team"][11]["team_stats"]["rank"]
 
     standings = """|WEST|||EAST|||
 |:---:|:---:|:---:|:---:|:---:|:---:|
