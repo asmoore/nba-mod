@@ -244,97 +244,6 @@ def create_game_thread_bar(all_games):
 
     return scorebar
 
-def get_standings():
-    """Return a string markdown table of standings pulled from ESPN.
-    
-    """
-    #Initialize lists
-    team_list = [];
-    W_list = [];
-    L_list = [];
-    west = [];
-    east = [];
-    #Create headers for standings
-    standings = '''\n\n**STANDINGS**\n\n
-|EAST|||WEST|||
-|:---:|:---:|:---:|:---:|:---:|:---:|
-|**TEAM**|*W/L*|*GB*|**TEAM**|*W/L*|*GB*|\n'''
-    
-    #Open ESPN        
-    tree = html.parse('http://espn.go.com/nba/standings/_/group/3')
-    #Get teams from URL
-    teams = tree.xpath('(//table[@class="tablehead"]/tr)/td//a[1]')
-    #Get corresponding wins
-    W = tree.xpath('(//table[@class="tablehead"]/tr)/td[2]')
-    #Get corresponding losses
-    L = tree.xpath('(//table[@class="tablehead"]/tr)/td[3]')
-
-    #Go through teams and add them to team_list
-    for j in range(0,len(teams)):
-        if str(teams[j].text) != "None" and str(teams[j].text) != "W" and str(teams[j].text) != "L" and str(teams[j].text) != "PCT" and str(teams[j].text) != "GB" and str(teams[j].text) != "HOME" and str(teams[j].text) != "ROAD" and str(teams[j].text) != "DIV" and str(teams[j].text) != "CONF" and str(teams[j].text) != "PF" and str(teams[j].text) != "PA" and str(teams[j].text) != "STRK":
-            #print teams[j].text
-            team_list.append(teams[j].text)
-    #Go through W and add them to W_list     
-    for j in range(0,len(W)):
-        if str(W[j].text) != "None":
-            #print W[j].text
-            W_list.append(W[j].text)
-    #Go through L and add them to L_list
-    for j in range(0,len(L)):
-        if str(L[j].text) != "None":
-            #print L[j].text
-            L_list.append(L[j].text)
-
-    #Create markdown table split into two tables (EAST, WEST)
-    for j in range(0,15):
-        if(float(W_list[j])+float(L_list[j])>0):
-            wpct = float(W_list[j])/(float(W_list[j])+float(L_list[j]))
-        else:
-            wpct = 0;
-        east.append({'team':team_list[j],'W':W_list[j],'L':L_list[j],'wpct':wpct})
-        if(float(W_list[j+15])+float(L_list[j+15])>0):
-            wpct = float(W_list[j+15])/(float(W_list[j+15])+float(L_list[j+15]))
-        else:
-            wpct=0;
-        west.append({'team':team_list[j+15],'W':W_list[j+15],'L':L_list[j+15],'wpct':wpct})
-
-    east_sorted = newlist = sorted(east, key=itemgetter('wpct'),reverse=True)
-    west_sorted = newlist = sorted(west, key=itemgetter('wpct'),reverse=True)
-
-    #ensure division leaders are in top 4
-    if east[0]['wpct']<=east_sorted[4]['wpct']:
-        east[0]['wpct'] = east_sorted[4]['wpct']+.01
-    if east[5]['wpct']<=east_sorted[4]['wpct']:
-        east[5]['wpct'] = east_sorted[4]['wpct']+.01
-    if east[10]['wpct']<=east_sorted[4]['wpct']:
-        east[10]['wpct'] = east_sorted[4]['wpct']+.01
-    if west[0]['wpct']<=west_sorted[4]['wpct']:
-        west[0]['wpct'] = west_sorted[4]['wpct']+.01
-    if west[5]['wpct']<=west_sorted[4]['wpct']:
-        west[5]['wpct'] = west_sorted[4]['wpct']+.01
-    if west[10]['wpct']<=west_sorted[4]['wpct']:
-        west[10]['wpct'] = west_sorted[4]['wpct']+.01
-
-    east = newlist = sorted(east, key=itemgetter('wpct'),reverse=True)
-    west = newlist = sorted(west, key=itemgetter('wpct'),reverse=True)
-
-    for j in range(0,15):
-        gb = ((float(east[0]['W'])-float(east[0]['L']))-(float(east[j]['W'])-float(east[j]['L'])))/2
-        if j<8:
-            standings = standings+'|'+str(j+1)+' '+east[j]['team']+'|'+east[j]['W']+'-'+east[j]['L']+'|'+str(gb)
-        else:
-            standings = standings+'|'+east[j]['team']+'|'+east[j]['W']+'-'+east[j]['L']+'|'+str(gb)
-        gb = ((float(west[0]['W'])-float(west[0]['L']))-(float(west[j]['W'])-float(west[j]['L'])))/2
-        if j<8:
-            standings = standings+'|'+str(j+1)+' '+west[j]['team']+'|'+west[j]['W']+'-'+west[j]['L']+'|'+str(gb)+'|'
-        else:
-            standings = standings+'|'+west[j]['team']+'|'+west[j]['W']+'-'+west[j]['L']+'|'+str(gb)+'|'
-        
-        standings = standings+'\n'
-    #Replace city names with href tags
-    standings = city_names_to_subs(standings)
-    standings = standings + "\n\n"
-    return standings
 
 def get_standings_nba():
     url = "http://data.nba.com/json/cms/2014/standings/conference.json"
@@ -342,7 +251,7 @@ def get_standings_nba():
     obs = json.loads(req)
     obs["sports_content"]["standings"]["conferences"]["East"]["team"][11]["team_stats"]["rank"]
 
-    standings = """|EAST|||WEST|||
+    standings = """|WEST|||EAST|||
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |**TEAM**|*W/L*|*GB*|**TEAM**|*W/L*|*GB*|
 """
@@ -357,9 +266,9 @@ def get_standings_nba():
         west_record = west["team_stats"]["wins"] + "-" + west["team_stats"]["losses"]
         west_gb_conf = west["team_stats"]["gb_conf"]
         if i < 8:
-            standings = standings + "|" + str(i+1) + " [](/" + east_name + ")| " + east_record + " | " + east_gb_conf + "|" + str(i+1) + " [](/" + west_name + ")| " + west_record + " | " + west_gb_conf + " |\n"
+            standings = standings + "|" + str(i+1) + " [](/" + west_name + ")| " + west_record + " | " + west_gb_conf + "|" + str(i+1) + " [](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |\n"
         else:
-            standings = standings + "|[](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |[](/" + west_name + ")| " + west_record + " | " + west_gb_conf + " |\n"
+            standings = standings + "|[](/" + west_name + ")| " + west_record + " | " + west_gb_conf + " |[](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |\n"
             
     return standings
 
