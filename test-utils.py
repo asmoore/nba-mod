@@ -26,8 +26,8 @@ class UtilsTest(unittest.TestCase):
     #	utils.get_game_threads()
 
 
-    def test_get_standings(self):
-    	standings = utils.get_standings()
+    def test_get_standings_nba(self):
+    	standings = utils.get_standings_nba()
     	print standings
 
 

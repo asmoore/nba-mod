@@ -266,8 +266,17 @@ def get_standings_nba():
         west_name = west["abbreviation"]
         west_record = west["team_stats"]["wins"] + "-" + west["team_stats"]["losses"]
         west_gb_conf = west["team_stats"]["gb_conf"]
+        east_div_rank = east["team_stats"]["div_rank"]
+        west_div_rank = west["team_stats"]["div_rank"]
+        east_rank = str(i+1)
+        west_rank = str(i+1)
+        if east_div_rank == "1":
+            east_rank = "\* "+ east_rank
+        if west_div_rank == "1":
+            west_rank = "\* "+ west_rank
         if i < 8:
-            standings = standings + "|" + str(i+1) + " [](/" + west_name + ")| " + west_record + " | " + west_gb_conf + "|" + str(i+1) + " [](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |\n"
+            standings = standings + "|" + west_rank + " [](/" + west_name + ")| " + west_record + " | " + west_gb_conf + "|" + east_rank + " [](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |\n"
+
         else:
             standings = standings + "|[](/" + west_name + ")| " + west_record + " | " + west_gb_conf + " |[](/" + east_name + ")| " + east_record + " | " + east_gb_conf + " |\n"
             
