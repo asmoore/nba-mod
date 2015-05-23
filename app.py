@@ -23,11 +23,12 @@ NBA_MOD_SECRET = os.environ['NBA_MOD_SECRET']
 app.config['SECRET_KEY'] = os.environ['NBA_MOD_SECRET']
 r = praw.Reddit('OAuth gamethread chat by /u/catmoon')
 r.set_oauth_app_info(NBA_MOD_CLIENT_ID, NBA_MOD_SECRET, NBA_MOD_REDIRECT_URL)
-authorize_url = r.get_authorize_url('DifferentUniqueKey','identity edit submit',refreshable = True)
+#authorize_url = r.get_authorize_url('DifferentUniqueKey','identity edit submit',refreshable = True)
 
 
 @app.route('/')
 def home():
+	authorize_url = r.get_authorize_url('DifferentUniqueKey','identity edit submit',refreshable = True)
     return render_template('home.html',authorize_url=authorize_url)
 
 #OAuth2 with reddit 
