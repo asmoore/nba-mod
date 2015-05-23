@@ -4,3 +4,4 @@ Flask==0.8
 gunicorn==19.2.1
 sqlalchemy==1.0.4
 whoosh==2.7.0
+Flask-SQLAlchemy==1.0
