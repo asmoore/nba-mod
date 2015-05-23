@@ -33,7 +33,7 @@ def home():
 #OAuth2 with reddit 
 @app.route("/auth/", methods = ['GET'])
 def auth():
-	#code = request.args.get('code', '')
+	code = request.args.get('code', '')
 	#info = r.get_access_information(code)
 	#r.set_access_credentials(**info)
 	#user = r.get_me()
