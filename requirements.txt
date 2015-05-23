@@ -1,2 +1,6 @@
 praw==2.1.14
 lxml==3.4.0
+Flask==0.8
+gunicorn==19.2.1
+sqlalchemy==1.0.4
+whoosh==2.7.0
