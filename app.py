@@ -36,7 +36,7 @@ def auth():
 	code = request.args.get('code', '')
 	info = r.get_access_information(code)
 	r.set_access_credentials(**info)
-	#user = r.get_me()
+	user = r.get_me()
 	###session['access_token'] = info['access_token']
 	###session['refresh_token'] = info['refresh_token']
 	#session['username'] = user.name
