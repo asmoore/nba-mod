@@ -15,10 +15,63 @@ import re
 import urllib2
 import urllib
 from lxml import html
+import requests
 from operator import itemgetter
 
 import praw
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from whoosh.qparser import QueryParser
+from whoosh.query import FuzzyTerm
+from whoosh.index import create_in
+from whoosh.fields import *
+from whoosh.index import open_dir
+
+from models import *
+
+
+def fetch_search(search_input, team_input):
+    """
+    Fetch search results.
+
+    """
+    search_results = []
+    root = test = os.path.dirname(os.path.realpath('__file__'))
+    ix = open_dir(root+"/data/")
+    with ix.searcher() as searcher:
+        query = QueryParser("player_name", ix.schema, termclass=FuzzyTerm).parse(search_input)
+        results = searcher.search_page(query,20)
+        for hit in results:
+            if hit["team_name"]==team_input:
+                search_results.append({"team_name":hit["team_name"], "player_name":hit["player_name"]})
+    return search_results
     
+
+def add_players():
+    team_list = ['ATL', 'BOS', 'NJN', 'CHA', 'CHI', 'CLE', 'DAL', 'DEN', 'DET', 'GSW',
+                 'HOU', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN', 'NOH', 'NYK',
+                 'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']
+    root = test = os.path.dirname(os.path.realpath('__file__'))
+    schema = Schema(player_name=TEXT(stored=True), 
+                    team_name=TEXT(stored=True))
+    ix = create_in(root+"/data/", schema)
+    writer = ix.writer()
+    for team in team_list:
+        url = 'http://www.basketball-reference.com/teams/' + team + '/players.html'
+        page = requests.get(url)
+        tree = html.fromstring(page.text)
+        players = tree.xpath('//tr/td/a/text()')
+        for player in players:
+            writer.add_document(player_name=unicode(player), team_name=unicode(team))
+    writer.commit()
+
+
+def get_players():
+    games = db.session.query(Player)
+    return games
+
+
 def get_team_subreddits(var_length):
     """Return a markdown table of top team subreddit threads.
         
@@ -381,3 +434,19 @@ def city_names_to_subs(var_string):
         city_names_to_subs = city_names_to_subs.replace(city,href)
     return city_names_to_subs
 
+
+def update_flair(user,flair_text,flair_class):
+    """Update a user's flair
+
+    """
+    r = praw.Reddit(user_agent='NBA_MOD using praw')
+    r.login(os.environ['USER'],os.environ['PASS'])
+    success = r.get_subreddit('nba').set_flair(user,flair_text,flair_class)
+    return success
+
+
+if __name__ == '__main__':
+    engine = create_engine("postgres://bvbaezxfnrmxev:YYESfSaRGDrxWPrZr8JuAdpoXY@ec2-23-23-188-252.compute-1.amazonaws.com:5432/ddvahv1uqndlvb")
+    Session = sessionmaker(bind=engine)    
+    session = Session()
+    session._model_changes = {}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  </head>
+    <title>NBA_MOD</title>
+
+<body>
+
+  <link href='http://fonts.googleapis.com/css?family=Exo:400,900' rel='stylesheet' type='text/css'>
+
+  <!-- CSS !-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/materialize.min.css') }}" media="screen,projection"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/flair.css') }}" media="screen,projection"/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <div class="wrapper">
+  <!-- HEADER --> 
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">NBA_MOD</a>
+        </div>
+      </nav>
+    </header>
+
+  <!-- BODY -->
+
+  <!-- SCRIPTS -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type='text/javascript' src="/static/js/vendor/materialize.min.js"></script>
+
+  {% block content %}{% endblock %}
+
+  <!-- FOOTER -->
+  </div>
+</body>
+
+</html>

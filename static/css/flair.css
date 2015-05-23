@@ -1,0 +1,175 @@
+.PHI, .flair-76ers1, .flair-76ers3, .flair-76ers2, .flair-Bobcats1, .flair-Bobcats2, .flair-Bobcats3, .CHB, .flair-Bobcats4,
+.flair-Braves, .MIL, .flair-Bucks1, .flair-Bucks2, .flair-Bucks3, .flair-Bucks4, .BUL, .flair-Bullets, .CHI, .flair-Bulls,
+.CLE, .flair-Cavaliers1, .flair-Cavaliers2, .flair-Cavaliers3, .BOS, .flair-Celtics1, .flair-Celtics2, .LAC, .flair-Clippers,
+.flair-Clippers2, .flair-Clippers3, .GEN, .flair-Generals, .MEM, .flair-Grizzlies, .flair-Grizzlies2, .flair-Hawks1,
+.ATL, .flair-Hawks2, .flair-Hawks3, .MIA, .flair-Heat, .flair-Heat2, .flair-Heat3, .NOH, .flair-Hornets, .flair-OKCHornets,
+.NOP, .flair-Pelicans, .flair-Pelicans2, .flair-Pelicans3, .flair-Pelicans4, .flair-Pelicans5, .UTA, .flair-Jazz1, .flair-Jazz2,
+.flair-Jazz3, .flair-Jazz4, .flair-Jazz5, .SAC, .flair-Kings1, .flair-Kings2, .flair-Kings3, .NYK, .flair-Knicks1, .flair-Knicks2,
+.flair-Knicks3, .flair-Knicks4, .flair-Knicks5, .flair-KnickerBockers, .LAL, .flair-Lakers1, .flair-Lakers2, .flair-Lakers3,
+.flair-MinnLakers, .ORL, .flair-Magic1, .flair-Magic2, .flair-Magic3, .flair-Magic4, .flair-Mavs1, .DAL, .flair-Mavs2, 
+.flair-Mavs3, .NJN, .flair-Nets1, .flair-Nets2, .BKN, .flair-Nets3, .DEN, .flair-Nuggets1, .flair-Nuggets2, .flair-Nuggets3,
+.flair-Nuggets4, .IND, .flair-Pacers1, .flair-Pacers2, .DET, .flair-Pistons1, .flair-Pistons2, .flair-Pistons3, .flair-Pistons4,
+.TOR, .flair-Raptors1, .flair-Raptors2, .flair-Raptors3, .flair-Raptors4, .flair-Raptors5, .flair-Raptors6, .flair-Raptors7,
+.flair-TorHuskies, .HOU, .flair-Rockets1, .flair-Rockets2, .flair-Rockets3, .SAS, .flair-Spurs1, .flair-Spurs2, .flair-Spurs3,
+.PHX, .flair-Suns1, .flair-Suns2, .PHX, .flair-Suns3, .flair-Suns4, .flair-Suns5, .flair-Suns6, .SUP, .flair-Supersonics1,
+.flair-Supersonics2, .OKC, .flair-Thunder, .MIN, .flair-Timberwolves1, .flair-Timberwolves2, .flair-Timberwolves3,
+.flair-Timberwolves4, .flair-TrailBlazers1, .POR, .flair-TrailBlazers2, .flair-TrailBlazers3, .flair-TrailBlazers4,
+.flair-TrailBlazers5, .GSW, .flair-Warriors1, .flair-Warriors2, .flair-Warriors3, .flair-Wizards, .WAS, .flair-Wizards2,
+.flair-Wizards3, .flair-Wizards4, .flair-Wizards5, .flair-ChaHornets, .CHA, .flair-ChaHornets2, .flair-ChaHornets3,
+.flair-ChaHornets4, .flair-ChaHornets5, .flair-ChaHornets6, .flair-VanGrizzlies, .flair-VanGrizzlies2, .flair-VanGrizzlies3,
+.flair-HawksSecond {
+    width: 33px;
+    height: 22px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-image: url("../images/sprite.png");
+    background-position: -9999px -9999px;
+    vertical-align: middle;
+    margin-right: 0px;
+    }
+.PHI, .flair-76ers1 { background-position: 0 -0px; }
+.flair-76ers3 { background-position: -36px -720px; }
+.flair-76ers2 { background-position: 0 -72px; }
+.flair-Bobcats1 { background-position: 0 -144px; }
+.flair-Bobcats2 { background-position: 0 -216px; }
+.flair-Bobcats3 { background-position: -166px -2088px; }
+.CHB, .flair-Bobcats4 { background-position: -249px -1224px; }
+.flair-Braves { background-position: -166px -144px; }
+.MIL, .flair-Bucks1 { background-position: 0 -288px; }
+.flair-Bucks2 { background-position: 0 -360px; }
+.flair-Bucks3 { background-position: -249px 0; }
+.flair-Bucks4 { background-position: -249px -216px; }
+.BUL, .flair-Bullets { background-position: -83px -1656px; }
+.CHI, .flair-Bulls { background-position: 0 -432px; }
+.CLE, .flair-Cavaliers1 { background-position: 0 -504px; }
+.flair-Cavaliers2 { background-position: -83px -1728px; }
+.flair-Cavaliers3 { background-position: -166px -864px; }
+.BOS, .flair-Celtics1 { background-position: 0 -576px; }
+.flair-Celtics2 { background-position: 0 -648px; }
+.LAC, .flair-Clippers { background-position: 0 -720px; }
+.flair-Clippers2 { background-position: -249px -576px; }
+.flair-Clippers3 { background-position: -249px -720px; }
+.GEN, .flair-Generals { background-position: -83px -1800px; }
+.MEM, .flair-Grizzlies { background-position: 0 -792px; }
+.flair-Grizzlies2 { background-position: -249px -144px; }
+.flair-Hawks1 { background-position: 0 -864px; }
+.ATL, .flair-Hawks2 { background-position: 0 -936px; }
+.flair-Hawks3 { background-position: -166px -360px; }
+.MIA, .flair-Heat { background-position: 0 -1008px; }
+.flair-Heat2 {
+    background-position: -249px -288px !important;
+    width:33px!important;
+    }
+.flair-Heat3 {    
+    background-position: -249px -504px !important;
+    width:33px!important;
+}
+.NOH, .flair-Hornets {  background-position: 0 -1080px; }
+.flair-OKCHornets { background-position: -36px -576px; }
+.NOP, .flair-Pelicans { background-position: -249px -551px !important; }
+.flair-Pelicans2 { background-position: -249px -1368px !important; }
+.flair-Pelicans3 { background-position: -249px -1440px !important; }
+.flair-Pelicans4 { background-position: -249px -1512px !important; }
+.flair-Pelicans5 { background-position: -249px -1584px !important; }
+.UTA, .flair-Jazz1 { background-position: 0 -1152px; }
+.flair-Jazz2 { background-position: -83px -1368px; }
+.flair-Jazz3 { background-position: -249px -1008px; }
+.flair-Jazz4 { background-position: -249px -1080px; }
+.flair-Jazz5 { background-position: -249px -1152px; }
+.SAC, .flair-Kings1 { background-position: 0 -1224px; }
+.flair-Kings2 { background-position: -166px -432px; }
+.flair-Kings3 { background-position: -249px -864px; }
+.NYK, .flair-Knicks1 { background-position: 0 -1296px; }
+.flair-Knicks2 { background-position: -166px -216px; }
+.flair-Knicks3 { background-position: -166px -936px; }
+.flair-Knicks4 { background-position: -249px -936px; }
+.flair-Knicks5 { background-position: -249px -1944px; }
+.flair-KnickerBockers { background-position: -36px -288px; }
+.LAL, .flair-Lakers1 { background-position: 0 -1368px; }
+.flair-Lakers2 { background-position: 0 -1440px; }
+.flair-Lakers3 { background-position: -36px -1440px; }
+.flair-MinnLakers { background-position: -36px -648px; }
+.ORL, .flair-Magic1 { background-position: 0 -1512px; }
+.flair-Magic2 { background-position: 0 -1584px; }
+.flair-Magic3 { background-position: -36px -1296px; }
+.flair-Magic4 { background-position: -36px -1368px; }
+.flair-Mavs1 { background-position: 0 -1656px; }
+.DAL, .flair-Mavs2 { background-position: 0 -1728px; }
+.flair-Mavs3 { background-position: -166px -504px; }
+.NJN, .flair-Nets1 { background-position: 0 -1800px; }
+.flair-Nets2 { background-position: -166px -648px; }
+.BKN, .flair-Nets3 { background-position: -166px -1296px; }
+.DEN, .flair-Nuggets1 { background-position: 0 -1872px; }
+.flair-Nuggets2 { background-position: 0 -1944px; }
+.flair-Nuggets3 { background-position: -166px -576px; }
+.flair-Nuggets4 { background-position: -249px -792px; }
+.IND, .flair-Pacers1 { background-position: -83px 0; }
+.flair-Pacers2 { background-position: -166px -720px; }
+.DET, .flair-Pistons1 { background-position: -83px -72px; }
+.flair-Pistons2 { background-position: -166px -1008px; }
+.flair-Pistons3 { background-position: -166px -288px; }
+.flair-Pistons4 { background-position: -249px -1296px; }
+.TOR, .flair-Raptors1 { background-position: -83px -144px; }
+.flair-Raptors2 { background-position: -83px -1440px; }
+.flair-Raptors3 { background-position: -83px -1512px; }
+.flair-Raptors4 { background-position: -166px -792px; }
+.flair-Raptors5 { background-position: -249px -360px; }
+.flair-Raptors6 { background-position: -36px -360px; }
+.flair-Raptors7 { background-position: -36px -1224px; }
+.flair-TorHuskies { background-position: -249px -432px; }
+.HOU, .flair-Rockets1 { background-position: -83px -216px; }
+.flair-Rockets2 { background-position: -83px -1584px; }
+.flair-Rockets3 { background-position: -83px -1872px; }
+.SAS, .flair-Spurs1 { background-position: -83px -288px; }
+.flair-Spurs2 { background-position: -83px -360px; }
+.flair-Spurs3 { background-position: -83px -1944px; }
+.PHX, .flair-Suns1 { background-position: -83px -432px; }
+.flair-Suns2 { background-position: -83px -504px; }
+.PHX, .flair-Suns3 { background-position: -249px -1656px; }
+.flair-Suns4 { background-position: -249px -1728px; }
+.flair-Suns5 { background-position: -249px -1800px; }
+.flair-Suns6 { background-position: -249px -1872px; }
+.SUP, .flair-Supersonics1 { background-position: -166px 0; }
+.flair-Supersonics2 { background-position: -166px -72px; }
+.OKC, .flair-Thunder { background-position: -83px -576px; }
+.MIN, .flair-Timberwolves1 { background-position: -83px -648px; }
+.flair-Timberwolves2 { background-position: -83px -720px; }
+.flair-Timberwolves3 { background-position: -166px -1080px; }
+.flair-Timberwolves4 { background-position: -249px -72px; }
+.flair-TrailBlazers1 { background-position: -83px -792px; }
+.POR, .flair-TrailBlazers2 { background-position: -83px -864px; }
+.flair-TrailBlazers3 { background-position: -36px -1008px; }
+.flair-TrailBlazers4 { background-position: -36px -1080px; }
+.flair-TrailBlazers5 { background-position: -36px -1152px; }
+.GSW, .flair-Warriors1 { background-position: -83px -936px; }
+.flair-Warriors2 { background-position: -83px -1008px; }
+.flair-Warriors3 { background-position: -249px -648px; }
+.flair-Wizards { background-position: -83px -1080px; }
+.WAS, .flair-Wizards2 { background-position: -166px -1152px; }
+.flair-Wizards3 { background-position: -166px -1224px; }
+.flair-Wizards4 { background-position: -36px -864px; }
+.flair-Wizards5 { background-position: -36px -936px; }
+.flair-ChaHornets { background-position: -166px -1368px; }
+.CHA, .flair-ChaHornets2 { background-position: -122px -360px; }
+.flair-ChaHornets3 { background-position: -119px -432px; }
+.flair-ChaHornets4 { background-position: -119px -504px; }
+.flair-ChaHornets5 { background-position: -119px -576px; }
+.flair-ChaHornets6 { background-position: -119px -648px; }
+.flair-VanGrizzlies { background-position: -166px -1440px; }
+.flair-VanGrizzlies2{ background-position: -36px -432px; }
+.flair-VanGrizzlies3{ background-position: -36px -504px; } 
+.flair-HawksSecond{ background-position: -36px -504px; }
+.NBA { background-position: -83px -1152px; }
+.WEST { background-position: -83px -1224px; }
+.EAST { background-position: -83px -1296px; }
+.NBATV { background-position: -202px -144px;}
+.ESPN {
+    width:48px!important;
+    height:14px!important;
+    background-position: -37px -122px;
+    }
+.ABC { background-position: -202px -97px; }
+.TNT {
+    width:46px;
+    background-position: -36px -97px;
+    }
