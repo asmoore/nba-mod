@@ -33,15 +33,15 @@ def home():
 #OAuth2 with reddit 
 @app.route("/auth/", methods = ['GET'])
 def auth():
-	code = request.args.get('code', '')
-	info = r.get_access_information(code)
-	r.set_access_credentials(**info)
-	user = r.get_me()
-	#session['access_token'] = info['access_token']
-	#session['refresh_token'] = info['refresh_token']
-	session['username'] = user.name
-	#session['logged_in'] = True
-	print user.name    
+	#code = request.args.get('code', '')
+	#info = r.get_access_information(code)
+	#r.set_access_credentials(**info)
+	#user = r.get_me()
+	###session['access_token'] = info['access_token']
+	###session['refresh_token'] = info['refresh_token']
+	#session['username'] = user.name
+	###session['logged_in'] = True
+	#print user.name    
 	return redirect(url_for('home'))
 
 #Autocomplete
