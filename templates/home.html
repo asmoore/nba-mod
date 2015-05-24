@@ -199,11 +199,9 @@
 	function checkIfComplete() {
 	    if ( $( ".mdi-toggle-check-box-outline-blank").length > 1) {
 		    //something's not complete yet 
-		    alert("not complete");
 		} else {
 			//all steps complete, activate the submit button
-            alert("complete");
-			$('.submit-button').attr('class', 'waves-effect waves-light btn');
+			$('#submit-button').attr('class', 'waves-effect waves-light btn');
 		}
 	};
 
