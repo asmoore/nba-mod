@@ -184,11 +184,7 @@
 		  <i id="submit-section" class="mdi-toggle-check-box-outline-blank"></i>
 	       4. Submit
 	    </h5>
-	    {% if not session.username %}
 	    <a class="waves-effect waves-light btn disabled">Submit</a>
-        {% else %}
-        <a id="submit" class="waves-effect waves-light btn">Submit</a>
-        {% endif %} 
         <div id="submit-progress" class="progress">
 		</div> 
      </div>
@@ -199,6 +195,18 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <script>
+	//Check if all boxes are checked
+	function checkIfComplete() {
+	    if ( $( ".mdi-toggle-check-box-outline-blank").length ) {
+		    //something's not complete yet 
+		    alert("not complete");
+		} else {
+			//all steps complete, activate the submit button
+            alert("complete");
+			$('#submit').attr('class', 'waves-effect waves-light btn');
+		}
+	};
+
   //1. Authenticate (logout button is clicked)
   $(function() {
       $('#logout').click(function()  {
@@ -206,6 +214,7 @@
         }, function(data) {
         	$('#logged-in-card').hide();
         	$('#logged-in').attr('class', 'mdi-toggle-check-box-outline-blank');
+        	checkIfComplete();
         });
         return false;
       });
@@ -218,6 +227,7 @@
 	    $('#team-select').attr('class', 'mdi-toggle-check-box');
 	    $('#player-select').attr('class', 'mdi-toggle-check-box-outline-blank');
 	    $('#players').val("");
+	    checkIfComplete();
 	})
 
   //3. Select player (when input changes)
@@ -232,6 +242,7 @@
 		      source: data.results,
 		      select: function(e, ui) {
       			$('#player-select').attr('class', 'mdi-toggle-check-box');
+      			checkIfComplete();
 		      }	
 		    });
         });
@@ -252,7 +263,8 @@
         }, function(data) {
         	$('#submit-progress').html('');
         	$('#submit-section').attr('class', 'mdi-toggle-check-box');
-        	toast('Flair changed successfully!', 4000)
+        	toast('Flair changed successfully!', 4000);
+        	checkIfComplete();
         });
         return false;
       });
