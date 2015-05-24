@@ -250,7 +250,7 @@
 	
   //4. Submit (when submit button is clicked)
   $(function() {
-      $('#submit').click(function()  {
+      $('#submit-button').click(function()  {
         $.getJSON('/submit', {
           beforeSend: function(){
 	        $('#submit-progress').html('<div class="indeterminate"></div>');
