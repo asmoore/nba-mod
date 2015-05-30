@@ -17,7 +17,7 @@
 .flair-TrailBlazers5, .GSW, .flair-Warriors1, .flair-Warriors2, .flair-Warriors3, .flair-Wizards, .WAS, .flair-Wizards2,
 .flair-Wizards3, .flair-Wizards4, .flair-Wizards5, .flair-ChaHornets, .CHA, .flair-ChaHornets2, .flair-ChaHornets3,
 .flair-ChaHornets4, .flair-ChaHornets5, .flair-ChaHornets6, .flair-VanGrizzlies, .flair-VanGrizzlies2, .flair-VanGrizzlies3,
-.flair-HawksSecond {
+.flair-HawksSecond, .flair-NBA, .flair-EAST, .flair-WEST {
     width: 33px;
     height: 22px;
     display: inline-block;
@@ -159,9 +159,9 @@
 .flair-VanGrizzlies2{ background-position: -36px -432px; }
 .flair-VanGrizzlies3{ background-position: -36px -504px; } 
 .flair-HawksSecond{ background-position: -36px -504px; }
-.NBA { background-position: -83px -1152px; }
-.WEST { background-position: -83px -1224px; }
-.EAST { background-position: -83px -1296px; }
+.flair-NBA { background-position: -83px -1152px; }
+.flair-WEST { background-position: -83px -1224px; }
+.flair-EAST { background-position: -83px -1296px; }
 .NBATV { background-position: -202px -144px;}
 .ESPN {
     width:48px!important;

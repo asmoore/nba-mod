@@ -36,15 +36,29 @@ def fetch_search(search_input, team_input):
     Fetch search results.
 
     """
+    east_list = ["TOR", "BOS", "NJN", "PHI", "NYK", "CLE", "CHI", "MIL", "IND", "DET", "ATL", "WAS", "MIA", "CHA", "ORL"]
+    west_list = ["POR", "OKC", "UTA", "DEN", "MIN", "GSW", "LAC", "PHO", "SAC", "LAL", "HOU", "MEM", "SAS", "DAL", "NOH"]
     search_results = []
     root = test = os.path.dirname(os.path.realpath('__file__'))
     ix = open_dir(root+"/data/")
     with ix.searcher() as searcher:
         query = QueryParser("player_name", ix.schema, termclass=FuzzyTerm).parse(search_input)
         results = searcher.search_page(query,20)
-        for hit in results:
-            if hit["team_name"]==team_input:
+        if team_input=="NBA":
+            for hit in results:
                 search_results.append({"team_name":hit["team_name"], "player_name":hit["player_name"]})
+        elif team_input=="EAST":
+            for hit in results:
+                if hit["team_name"] in east_list:
+                    search_results.append({"team_name":hit["team_name"], "player_name":hit["player_name"]})
+        elif team_input=="WEST":
+            for hit in results:
+                if hit["team_name"] in west_list:
+                    search_results.append({"team_name":hit["team_name"], "player_name":hit["player_name"]})
+        else:
+            for hit in results:
+                if hit["team_name"]==team_input:
+                    search_results.append({"team_name":hit["team_name"], "player_name":hit["player_name"]})
     return search_results
     
 
