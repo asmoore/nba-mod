@@ -49,8 +49,11 @@ def autocomplete():
     players = utils.fetch_search(search_input, team_input)
     player_list = []
     for player in players:
-        #if player["team_name"]==team_input:
-        player_list.append("[" + player["team_name"] + "] " + player["player_name"])
+        #handle mislabeling of NOP
+        if player["team_name"]=="NOH":
+            player_list.append("[NOP] " + player["player_name"])
+        else:
+            player_list.append("[" + player["team_name"] + "] " + player["player_name"])
     return jsonify(results=player_list)
 
 #Logout
