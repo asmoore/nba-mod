@@ -13,8 +13,8 @@ import unittest
 import utils
 
 class UtilsTest(unittest.TestCase):
-    #def test_get_team_subreddits(self):
-    #	utils.get_team_subreddits(3)
+    def test_get_team_subreddits(self):
+    	utils.get_team_subreddits(3)
 
 
     #def test_get_schedule(self):
@@ -28,9 +28,9 @@ class UtilsTest(unittest.TestCase):
     #    players = utils.get_players()
     #    print players
 
-    def test_fetch_search(self):
-        results = utils.fetch_search("Wade")
-        print results
+    #def test_fetch_search(self):
+    #    results = utils.fetch_search("Wade")
+    #    print results
 
     #def test_add_teams(self):
     #    teams = utils.add_teams()

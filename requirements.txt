@@ -1,4 +1,4 @@
-praw==2.1.14
+praw==3.2.1
 lxml==3.4.0
 Flask==0.8
 gunicorn==19.2.1
