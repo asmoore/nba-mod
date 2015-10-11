@@ -125,7 +125,7 @@ def get_schedule(var_length):
     #Log in to Reddit using 
     r.login(os.environ['USER'],os.environ['PASS'])
     #Get the schedule from the wiki
-    schedule_md = r.get_subreddit('NBA').get_wiki_page('schedule_2014-2015').content_md
+    schedule_md = r.get_subreddit('NBA').get_wiki_page('schedule_2015-2016').content_md
     #Split the schedule by individual lines. Each line is a different game
     games = schedule_md.split('\n')
     #Add the header to the schedule table 
