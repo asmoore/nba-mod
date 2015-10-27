@@ -324,8 +324,8 @@ def get_standings_nba():
 |**TEAM**|*W/L*|*GB*|**TEAM**|*W/L*|*GB*|
 """
 
-    #for i in range(0,15):
-    for i in reversed(range(0,15)):
+    for i in range(0,15):
+    #for i in reversed(range(0,15)):
         east = obs["sports_content"]["standings"]["conferences"]["East"]["team"][i]
         east_name = east["abbreviation"]
         east_record = east["team_stats"]["wins"] + "-" + east["team_stats"]["losses"]
