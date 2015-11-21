@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+	<h3>Add player flair</h3>
+	<div class="divider"></div>
+	  <div class="section">
+	    <h5>
+	    	{% if not session.username %}
+		  	<i id="logged-in" class="mdi-toggle-check-box-outline-blank"></i>
+	        {% else %}
+	        <i id="logged-in" class="mdi-toggle-check-box"></i>
+	        {% endif %}
+	        1. Authenticate on reddit
+	    </h5>
+		<a class="waves-effect waves-light btn" href="{{authorize_url}}">Go to reddit!</a>
+	    {% if not session.username %}
+        {% else %}
+        <div id="logged-in-card" class="card blue">
+            <div class="card-content white-text">
+              <span class="card-title">Authenticated successfully!</span>
+              <p>You are {{session.username}}</p>
+            </div>
+            <div class="card-action">
+              <a id="logout" href="#">Logout</a>
+            </div>
+          </div>
+        {% endif %}
+	  </div>
+	  <div class="divider"></div>
+	  <div class="section">
+	    <h5>
+	    	
+		  	<i id="team-select" class="mdi-toggle-check-box-outline-blank"></i>
+	        2. Select team flair
+	    </h5>
+
+		<form name="team-form">
+			<ul class="bsfasdf" id="team-list">
+				 <li title="NBA" class="flair-NBA"></li>
+				 <li title="EAST" class="flair-EAST"></li>
+				 <li title="WEST" class="flair-WEST"></li>
+				 <li title="PHI" class="flair-76ers1"></li>
+				 <li title="PHI" class="flair-76ers3"></li>
+				 <li title="PHI" class="flair-76ers2"></li>
+				 <li title="CHA" class="flair-Bobcats1"></li>
+				 <li title="CHA" class="flair-Bobcats2"></li>
+				 <li title="CHA" class="flair-Bobcats3"></li>
+				 <li title="CHA" class="flair-Bobcats4"></li>
+				 <li title="BUF" class="flair-Braves"></li>
+				 <li title="MIL" class="flair-Bucks1"></li>
+				 <li title="MIL" class="flair-Bucks2"></li>
+				 <li title="MIL" class="flair-Bucks3"></li>
+				 <li title="MIL" class="flair-Bucks4"></li>
+				 <li title="WAS" class="flair-Bullets"></li>
+				 <li title="CHI" class="flair-Bulls"></li>
+				 <li title="CLE" class="flair-Cavaliers1"></li>
+				 <li title="CLE" class="flair-Cavaliers2"></li>
+				 <li title="CLE" class="flair-Cavaliers3"></li>
+				 <li title="BOS" class="flair-Celtics1"></li>
+				 <li title="BOS" class="flair-Celtics2"></li>
+				 <li title="LAC" class="flair-Clippers"></li>
+				 <li title="LAC" class="flair-Clippers2"></li>
+				 <li title="LAC" class="flair-Clippers3"></li>
+				 <li title="DC" class="flair-Generals"></li>
+				 <li title="MEM" class="flair-Grizzlies"></li>
+				 <li title="MEM" class="flair-Grizzlies2"></li>
+				 <li title="ATL" class="flair-Hawks1"></li>
+				 <li title="ATL" class="flair-Hawks2"></li>
+				 <li title="ATL" class="flair-Hawks3"></li>
+				 <li title="MIA" class="flair-Heat"></li>
+				 <li title="MIA" class="flair-Heat2"></li>
+				 <li title="MIA" class="flair-Heat3"></li>
+				 <li title="NOH" class="flair-Hornets"></li>
+				 <li title="OKC" class="flair-OKCHornets"></li>
+				 <li title="NOH" class="flair-Pelicans"></li>
+				 <li title="NOH" class="flair-Pelicans2"></li>
+				 <li title="NOH" class="flair-Pelicans3"></li>
+				 <li title="NOH" class="flair-Pelicans4"></li>
+				 <li title="NOH" class="flair-Pelicans5"></li>
+				 <li title="UTA" class="flair-Jazz1"></li>
+				 <li title="UTA" class="flair-Jazz2"></li>
+				 <li title="UTA" class="flair-Jazz3"></li>
+				 <li title="UTA" class="flair-Jazz4"></li>
+				 <li title="UTA" class="flair-Jazz5"></li>
+				 <li title="SAC" class="flair-Kings1"></li>
+				 <li title="SAC" class="flair-Kings2"></li>
+				 <li title="SAC" class="flair-Kings3"></li>
+				 <li title="NYK" class="flair-Knicks1"></li>
+				 <li title="NYK" class="flair-Knicks2"></li>
+				 <li title="NYK" class="flair-Knicks3"></li>
+				 <li title="NYK" class="flair-Knicks4"></li>
+				 <li title="NYK" class="flair-Knicks5"></li>
+				 <li title="NYK" class="flair-KnickerBockers"></li>
+				 <li title="LAL" class="flair-Lakers1"></li>
+				 <li title="LAL" class="flair-Lakers2"></li>
+				 <li title="LAL" class="flair-Lakers3"></li>
+				 <li title="LAL" class="flair-MinnLakers"></li>
+				 <li title="ORL" class="flair-Magic1"></li>
+				 <li title="ORL" class="flair-Magic2"></li>
+				 <li title="ORL" class="flair-Magic3"></li>
+				 <li title="ORL" class="flair-Magic4"></li>
+				 <li title="DAL" class="flair-Mavs1"></li>
+				 <li title="DAL" class="flair-Mavs2"></li>
+				 <li title="DAL" class="flair-Mavs3"></li>
+				 <li title="NJN" class="flair-Nets1"></li>
+				 <li title="NJN" class="flair-Nets2"></li>
+				 <li title="NJN" class="flair-Nets3"></li>
+				 <li title="DEN" class="flair-Nuggets1"></li>
+				 <li title="DEN" class="flair-Nuggets2"></li>
+				 <li title="DEN" class="flair-Nuggets3"></li>
+				 <li title="DEN" class="flair-Nuggets4"></li>
+				 <li title="IND" class="flair-Pacers1"></li>
+				 <li title="IND" class="flair-Pacers2"></li>
+				 <li title="DET" class="flair-Pistons1"></li>
+				 <li title="DET" class="flair-Pistons2"></li>
+				 <li title="DET" class="flair-Pistons3"></li>
+				 <li title="DET" class="flair-Pistons4"></li>
+				 <li title="TOR" class="flair-Raptors1"></li>
+				 <li title="TOR" class="flair-Raptors2"></li>
+				 <li title="TOR" class="flair-Raptors3"></li>
+				 <li title="TOR" class="flair-Raptors4"></li>
+				 <li title="TOR" class="flair-Raptors5"></li>
+				 <li title="TOR" class="flair-Raptors6"></li>
+				 <li title="TOR" class="flair-Raptors7"></li>
+				 <li title="TOR" class="flair-TorHuskies"></li>
+				 <li title="HOU" class="flair-Rockets1"></li>
+				 <li title="HOU" class="flair-Rockets2"></li>
+				 <li title="HOU" class="flair-Rockets3"></li>
+				 <li title="SAS" class="flair-Spurs1"></li>
+				 <li title="SAS" class="flair-Spurs2"></li>
+				 <li title="SAS" class="flair-Spurs3"></li>
+				 <li title="PHO" class="flair-Suns1"></li>
+				 <li title="PHO" class="flair-Suns2"></li>
+				 <li title="PHO" class="flair-Suns3"></li>
+				 <li title="PHO" class="flair-Suns4"></li>
+				 <li title="PHO" class="flair-Suns5"></li>
+				 <li title="PHO" class="flair-Suns6"></li>
+				 <li title="OKC" class="flair-Supersonics1"></li>
+				 <li title="OKC" class="flair-Supersonics2"></li>
+				 <li title="OKC" class="flair-Thunder"></li>
+				 <li title="MIN" class="flair-Timberwolves1"></li>
+				 <li title="MIN" class="flair-Timberwolves2"></li>
+				 <li title="MIN" class="flair-Timberwolves3"></li>
+				 <li title="MIN" class="flair-Timberwolves4"></li>
+				 <li title="POR" class="flair-TrailBlazers1"></li>
+				 <li title="POR" class="flair-TrailBlazers2"></li>
+				 <li title="POR" class="flair-TrailBlazers3"></li>
+				 <li title="POR" class="flair-TrailBlazers4"></li>
+				 <li title="POR" class="flair-TrailBlazers5"></li>
+				 <li title="GSW" class="flair-Warriors1"></li>
+				 <li title="GSW" class="flair-Warriors2"></li>
+				 <li title="GSW" class="flair-Warriors3"></li>
+				 <li title="WAS" class="flair-Wizards"></li>
+				 <li title="WAS" class="flair-Wizards2"></li>
+				 <li title="WAS" class="flair-Wizards3"></li>
+				 <li title="WAS" class="flair-Wizards4"></li>
+				 <li title="WAS" class="flair-Wizards5"></li>
+				 <li title="CHA" class="flair-ChaHornets"></li>
+				 <li title="CHA" class="flair-ChaHornets2"></li>
+				 <li title="CHA" class="flair-ChaHornets3"></li>
+				 <li title="CHA" class="flair-ChaHornets4"></li>
+				 <li title="CHA" class="flair-ChaHornets5"></li>
+				 <li title="CHA" class="flair-ChaHornets6"></li>
+				 <li title="MEM" class="flair-VanGrizzlies"></li>
+				 <li title="MEM" class="flair-VanGrizzlies2"></li>
+				 <li title="MEM" class="flair-VanGrizzlies3"></li>
+			</ul>
+			<input id="team-value" size="15" name="size" type="text" readonly/>
+		</form>
+      </div>
+	  <div class="divider"></div>
+	  <div class="section">
+	    <h5>
+		  	<i id="player-select" class="mdi-toggle-check-box-outline-blank"></i>
+	        3. Select player (must have played for team selected above)
+	    </h5>
+        <div class="ui-widget">
+		  <label for="players">Player: </label>
+		  <input id="players">
+          <input id="player-value" size="15" name="size" type="text" readonly/>
+		</div>
+      </div>
+      <div class="divider"></div>
+      <div class="section">
+	    <h5>
+		  <i id="submit-section" class="mdi-toggle-check-box-outline-blank"></i>
+	       4. Submit
+	    </h5>
+	    <a id="submit-button" class="waves-effect waves-light btn disabled">Submit</a>
+        <div id="submit-progress" class="progress">
+		</div> 
+     </div>
+</div>
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script>
+	//Check if all boxes are checked
+	function checkIfComplete() {
+	    if ( $( ".mdi-toggle-check-box-outline-blank").length > 1) {
+		    //something's not complete yet 
+		} else {
+			//all steps complete, activate the submit button
+			$('#submit-button').attr('class', 'waves-effect waves-light btn');
+		}
+	};
+
+  //1. Authenticate (logout button is clicked)
+  $(function() {
+      $('#logout').click(function()  {
+        $.getJSON('/logout', {
+        }, function(data) {
+        	$('#logged-in-card').hide();
+        	$('#logged-in').attr('class', 'mdi-toggle-check-box-outline-blank');
+        	checkIfComplete();
+        });
+        return false;
+      });
+    });
+
+  //2. Select team flair (when team flair icon is clicked)
+  $("#team-list li").on("click", function(e){
+	    $("#team-value").val($(this).attr("title"));
+	    $("#team-value").attr('flair_class',$(this).attr("class"));
+	    $('#team-select').attr('class', 'mdi-toggle-check-box');
+	    $('#player-select').attr('class', 'mdi-toggle-check-box-outline-blank');
+	    $('#players').val("");
+	    checkIfComplete();
+	})
+
+  //3. Select player (when input changes)
+  $(function() {
+      $('.ui-widget').on('input', function() {
+      	$('#player-select').attr('class', 'mdi-toggle-check-box-outline-blank');
+        $.getJSON('/autocomplete', {
+          search_input: $('#players').val(),
+          team_input: $("#team-value").val()
+        }, function(data) {
+        	$( "#players" ).autocomplete({
+		      source: data.results,
+		      select: function(e, ui) {
+		        $("#player-value").val(ui.item.value);
+      			$('#player-select').attr('class', 'mdi-toggle-check-box');
+      			checkIfComplete();
+		      }	
+		    });
+        });
+        return false;
+      });
+    });
+	
+  //4. Submit (when submit button is clicked)
+  $(function() {
+      $('#submit-button').click(function()  {
+      	if ( $('#submit-button').attr('class') == 'waves-effect waves-light btn disabled' ) {
+      		//disabled, don't do anything
+      	} else { 
+	        $.getJSON('/submit', {
+	          beforeSend: function(){
+		        $('#submit-progress').html('<div class="indeterminate"></div>');
+		      },
+	          async: false,
+	          flair_text: $('#player-value').val(),
+	          flair_class: $('#team-value').attr('flair_class')
+	        }, function(data) {
+	        	$('#submit-progress').html('');
+	        	$('#submit-section').attr('class', 'mdi-toggle-check-box');
+	        	toast('Flair changed successfully!', 4000);
+	        	checkIfComplete();
+	        });
+	    }
+        return false;
+      });
+    });
+</script>
+{% endblock %}

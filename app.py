@@ -29,7 +29,12 @@ authorize_url = r.get_authorize_url('DifferentUniqueKey','identity',refreshable 
 @app.route('/')
 def home():
 	#authorize_url = r.get_authorize_url('DifferentUniqueKey','identity edit submit',refreshable = True)
-    return render_template('home.html',authorize_url=authorize_url)
+    return render_template('player_flair.html',authorize_url=authorize_url)
+
+@app.route('/player_flair')
+def player_flair():
+    #authorize_url = r.get_authorize_url('DifferentUniqueKey','identity edit submit',refreshable = True)
+    return render_template('player_flair.html',authorize_url=authorize_url)
 
 #OAuth2 with reddit 
 @app.route("/auth/", methods = ['GET'])
