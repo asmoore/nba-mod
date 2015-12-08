@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br>
+<div id="bar" style="height:750px;"></div>
+
+<!-- CSS !-->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/nv.d3.css') }}" media="screen,projection"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<!-- SCRIPTS -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="/static/js/boxChart.js"></script>
+<div id="last_updated"></div>
+
+<script type=text/javascript>
+  $(function() {
+  	$.getJSON('/_flair_list', {
+      }, function(data) {
+          flair_list = data.flair_list;
+          makeBoxChart(flair_list);
+          $("#last_updated").text("last updated:" + data.last_updated);
+      });
+      return false;
+  });
+</script>
+
+
+
+{% endblock %}

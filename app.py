@@ -10,11 +10,15 @@ Main flask app for NBA_MOD.
 """
 
 import os
+import json
 
 from flask import Flask, flash, render_template, session, request, redirect, url_for, jsonify
 import praw
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 import utils
+from models import *
 
 app = Flask(__name__)
 NBA_MOD_REDIRECT_URL = os.environ['NBA_MOD_REDIRECT_URL']
@@ -78,6 +82,26 @@ def submit():
     print success
     return jsonify(success=[])
 
+#flair stats
+@app.route('/flair_stats')
+def flair_stats():
+    return render_template('flair_stats.html')
+
+@app.route('/_flair_list')
+def add_numbers():
+    flair = db.session.query(Flair).order_by(Flair.id.desc()).first()
+    flairjson = json.loads(flair.jsondata.decode('string-escape').strip('"'))
+    #flairjson = json.loads('[{"jflair": {"color": "rgba(159,234,231)", "number":1}}]')
+    flair_list = []
+    for item in flairjson:
+        flair_list.append(item["jflair"])
+
+    return jsonify(flair_list=flair_list, last_updated=flair.date)
+
 
 if __name__ == "__main__":
+    engine = create_engine("postgres://bvbaezxfnrmxev:YYESfSaRGDrxWPrZr8JuAdpoXY@ec2-23-23-188-252.compute-1.amazonaws.com:5432/ddvahv1uqndlvb")
+    Session = sessionmaker(bind=engine)    
+    session = Session()
+    session._model_changes = {}
     app.run(debug=True)

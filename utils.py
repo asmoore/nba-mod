@@ -459,6 +459,174 @@ def update_flair(user,flair_text,flair_class):
     return success
 
 
+def get_team_from_flair_class(css):
+    team_flair_list = [{"flair_name":"EAST","team":"Other"},
+                    {"flair_name":"WEST","team":"Other"},
+                    {"flair_name":"76ers1","team":"Philadelphia"},
+                    {"flair_name":"76ers3","team":"Philadelphia"},
+                    {"flair_name":"76ers2","team":"Philadelphia"},
+                    {"flair_name":"Bobcats1","team":"Charlotte"},
+                    {"flair_name":"Bobcats2","team":"Charlotte"},
+                    {"flair_name":"Bobcats3","team":"Charlotte"},
+                    {"flair_name":"Bobcats4","team":"Charlotte"},
+                    {"flair_name":"Braves","team":"Other"},
+                    {"flair_name":"Bucks1","team":"Milwaukee"},
+                    {"flair_name":"Bucks2","team":"Milwaukee"},
+                    {"flair_name":"Bucks3","team":"Milwaukee"},
+                    {"flair_name":"Bucks4","team":"Milwaukee"},
+                    {"flair_name":"Bullets","team":"Washington"},
+                    {"flair_name":"Bulls","team":"Chicago"},
+                    {"flair_name":"Cavaliers1","team":"Cleveland"},
+                    {"flair_name":"Cavaliers2","team":"Cleveland"},
+                    {"flair_name":"Cavaliers3","team":"Cleveland"},
+                    {"flair_name":"Celtics1","team":"Boston"},
+                    {"flair_name":"Celtics2","team":"Boston"},
+                    {"flair_name":"Clippers","team":"L.A. Clippers"},
+                    {"flair_name":"Clippers2","team":"L.A. Clippers"},
+                    {"flair_name":"Clippers3","team":"L.A. Clippers"},
+                    {"flair_name":"Generals","team":"Other"},
+                    {"flair_name":"Grizzlies","team":"Memphis"},
+                    {"flair_name":"Grizzlies2","team":"Memphis"},
+                    {"flair_name":"Hawks1","team":"Atlanta"},
+                    {"flair_name":"Hawks2","team":"Atlanta"},
+                    {"flair_name":"Hawks3","team":"Atlanta"},
+                    {"flair_name":"Heat","team":"Miami"},
+                    {"flair_name":"Heat2","team":"Miami"},
+                    {"flair_name":"Heat3","team":"Miami"},
+                    {"flair_name":"Hornets","team":"Charlotte"},
+                    {"flair_name":"OKCHornets","team":"Oklahoma City"},
+                    {"flair_name":"Pelicans","team":"New Orleans"},
+                    {"flair_name":"Pelicans2","team":"New Orleans"},
+                    {"flair_name":"Pelicans3","team":"New Orleans"},
+                    {"flair_name":"Pelicans4","team":"New Orleans"},
+                    {"flair_name":"Pelicans5","team":"New Orleans"},
+                    {"flair_name":"Jazz1","team":"Utah"},
+                    {"flair_name":"Jazz2","team":"Utah"},
+                    {"flair_name":"Jazz3","team":"Utah"},
+                    {"flair_name":"Jazz4","team":"Utah"},
+                    {"flair_name":"Jazz5","team":"Utah"},
+                    {"flair_name":"Kings1","team":"Sacramento"},
+                    {"flair_name":"Kings2","team":"Sacramento"},
+                    {"flair_name":"Kings3","team":"Sacramento"},
+                    {"flair_name":"Knicks1","team":"New York"},
+                    {"flair_name":"Knicks2","team":"New York"},
+                    {"flair_name":"Knicks3","team":"New York"},
+                    {"flair_name":"Knicks4","team":"New York"},
+                    {"flair_name":"Knicks5","team":"New York"},
+                    {"flair_name":"KnickerBockers","team":"New York"},
+                    {"flair_name":"Lakers1","team":"L.A. Lakers"},
+                    {"flair_name":"Lakers2","team":"L.A. Lakers"},
+                    {"flair_name":"Lakers3","team":"L.A. Lakers"},
+                    {"flair_name":"MinnLakers","team":"Minnesota"},
+                    {"flair_name":"Magic1","team":"Orlando"},
+                    {"flair_name":"Magic2","team":"Orlando"},
+                    {"flair_name":"Magic3","team":"Orlando"},
+                    {"flair_name":"Magic4","team":"Orlando"},
+                    {"flair_name":"Mavs1","team":"Dallas"},
+                    {"flair_name":"Mavs2","team":"Dallas"},
+                    {"flair_name":"Mavs3","team":"Dallas"},
+                    {"flair_name":"Nets1","team":"Brooklyn"},
+                    {"flair_name":"Nets2","team":"Brooklyn"},
+                    {"flair_name":"Nets3","team":"Brooklyn"},
+                    {"flair_name":"Nuggets1","team":"Denver"},
+                    {"flair_name":"Nuggets2","team":"Denver"},
+                    {"flair_name":"Nuggets3","team":"Denver"},
+                    {"flair_name":"Nuggets4","team":"Denver"},
+                    {"flair_name":"Pacers1","team":"Indiana"},
+                    {"flair_name":"Pacers2","team":"Indiana"},
+                    {"flair_name":"Pistons1","team":"Detroit"},
+                    {"flair_name":"Pistons2","team":"Detroit"},
+                    {"flair_name":"Pistons3","team":"Detroit"},
+                    {"flair_name":"Pistons4","team":"Detroit"},
+                    {"flair_name":"Raptors1","team":"Toronto"},
+                    {"flair_name":"Raptors2","team":"Toronto"},
+                    {"flair_name":"Raptors3","team":"Toronto"},
+                    {"flair_name":"Raptors4","team":"Toronto"},
+                    {"flair_name":"Raptors5","team":"Toronto"},
+                    {"flair_name":"Raptors6","team":"Toronto"},
+                    {"flair_name":"Raptors7","team":"Toronto"},
+                    {"flair_name":"TorHuskies","team":"Toronto"},
+                    {"flair_name":"Rockets1","team":"Houston"},
+                    {"flair_name":"Rockets2","team":"Houston"},
+                    {"flair_name":"Rockets3","team":"Houston"},
+                    {"flair_name":"Spurs1","team":"San Antonio"},
+                    {"flair_name":"Spurs2","team":"San Antonio"},
+                    {"flair_name":"Spurs3","team":"San Antonio"},
+                    {"flair_name":"Suns1","team":"Phoenix"},
+                    {"flair_name":"Suns2","team":"Phoenix"},
+                    {"flair_name":"Suns3","team":"Phoenix"},
+                    {"flair_name":"Suns4","team":"Phoenix"},
+                    {"flair_name":"Suns5","team":"Phoenix"},
+                    {"flair_name":"Suns6","team":"Phoenix"},
+                    {"flair_name":"Supersonics1","team":"Seattle"},
+                    {"flair_name":"Supersonics2","team":"Seattle"},
+                    {"flair_name":"Thunder","team":"Oklahoma City"},
+                    {"flair_name":"Timberwolves1","team":"Minnesota"},
+                    {"flair_name":"Timberwolves2","team":"Minnesota"},
+                    {"flair_name":"Timberwolves3","team":"Minnesota"},
+                    {"flair_name":"Timberwolves4","team":"Minnesota"},
+                    {"flair_name":"TrailBlazers1","team":"Portland"},
+                    {"flair_name":"TrailBlazers2","team":"Portland"},
+                    {"flair_name":"TrailBlazers3","team":"Portland"},
+                    {"flair_name":"TrailBlazers4","team":"Portland"},
+                    {"flair_name":"TrailBlazers5","team":"Portland"},
+                    {"flair_name":"Warriors1","team":"Golden State"},
+                    {"flair_name":"Warriors2","team":"Golden State"},
+                    {"flair_name":"Warriors3","team":"Golden State"},
+                    {"flair_name":"Wizards","team":"Washington"},
+                    {"flair_name":"Wizards2","team":"Washington"},
+                    {"flair_name":"Wizards3","team":"Washington"},
+                    {"flair_name":"Wizards4","team":"Washington"},
+                    {"flair_name":"Wizards5","team":"Washington"},
+                    {"flair_name":"ChaHornets","team":"Charlotte"},
+                    {"flair_name":"ChaHornets2","team":"Charlotte"},
+                    {"flair_name":"ChaHornets3","team":"Charlotte"},
+                    {"flair_name":"ChaHornets4","team":"Charlotte"},
+                    {"flair_name":"ChaHornets5","team":"Charlotte"},
+                    {"flair_name":"ChaHornets6","team":"Charlotte"},
+                    {"flair_name":"VanGrizzlies","team":"Memphis"},
+                    {"flair_name":"VanGrizzlies2","team":"Memphis"},
+                    {"flair_name":"VanGrizzlies3","team":"Memphis"}]
+    team_name = ""
+    for team in team_flair_list:
+        if css == team["flair_name"]:
+            team_name = team["team"]
+    if len(team) == 0:
+        team_name = "Other"
+    return team_name
+
+
+def get_flair_count():
+
+    r = praw.Reddit('/u/catmoon using praw')
+    r.login(os.environ['USER'],os.environ['PASS'])
+    subreddit = r.get_subreddit('nba')
+    flairlist = subreddit.get_flair_list(limit=None)
+    flair_count = []
+
+    for flair in flairlist:
+         css = flair['flair_css_class']
+         #flair_text = flair['flair_text
+         match = False
+         for index, counted_flair in enumerate(flair_count):
+            if counted_flair["flairname"] == css:
+                counted_flair["number"] = counted_flair["number"] + 1
+                match = True
+         if match == False:
+             flair_count.append({'flairname':css, 'number':1,'team':get_team_from_flair_class(css)})
+    #     print flair_count
+    #flair_count = [{'color': 'rgba(159,234,231)', 'number': 1, 'flairname': u'Nets3', 'team': 'Chicago'}, {'color': 'rgba(144,84,240)', 'nu-mber': 1, 'flairname': u'Raptors1', 'team': 'Chicago'}, {'color': 'rgba(247,20,222)', 'number': 1, 'flairname': u'Rockets1', 'team': 'Chicago'}]
+    return flair_count
+
+
+def update_flair():
+    flair_list = get_flair_count()
+    flair_json = json.dumps([dict(jflair=lflair) for lflair in flair_list])
+    flair = Flair(jsondata=json.dumps(flair_json), date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    db.session.add(flair)
+    db.session.commit()
+
+
 if __name__ == '__main__':
     engine = create_engine("postgres://bvbaezxfnrmxev:YYESfSaRGDrxWPrZr8JuAdpoXY@ec2-23-23-188-252.compute-1.amazonaws.com:5432/ddvahv1uqndlvb")
     Session = sessionmaker(bind=engine)    
