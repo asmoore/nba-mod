@@ -102,7 +102,7 @@ def flair_list():
 
 
 if __name__ == "__main__":
-    engine = create_engine("postgres://bvbaezxfnrmxev:YYESfSaRGDrxWPrZr8JuAdpoXY@ec2-23-23-188-252.compute-1.amazonaws.com:5432/ddvahv1uqndlvb")
+    engine = create_engine(os.environ['DATABASE_URL'])
     Session = sessionmaker(bind=engine)    
     session = Session()
     session._model_changes = {}
