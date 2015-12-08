@@ -96,6 +96,7 @@ def flair_list():
     flair_list = []
     for item in flairjson:
         flair_list.append(item["jflair"])
+    print flair_list
 
     return jsonify(flair_list=flair_list, last_updated=flair.date)
 
