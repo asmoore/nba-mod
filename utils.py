@@ -603,7 +603,7 @@ def get_flair_count():
     subreddit = r.get_subreddit('nba')
     flairlist = subreddit.get_flair_list(limit=None)
     flair_count = []
-
+    
     for flair in flairlist:
          css = flair['flair_css_class']
          #flair_text = flair['flair_text
