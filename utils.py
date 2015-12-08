@@ -462,6 +462,7 @@ def update_flair(user,flair_text,flair_class):
 def get_team_from_flair_class(css):
     team_flair_list = [{"flair_name":"EAST","team":"Other"},
                     {"flair_name":"WEST","team":"Other"},
+                    {"flair_name":"NBA","team":"Other"},
                     {"flair_name":"76ers1","team":"Philadelphia"},
                     {"flair_name":"76ers3","team":"Philadelphia"},
                     {"flair_name":"76ers2","team":"Philadelphia"},
