@@ -88,7 +88,8 @@ def flair_stats():
     return render_template('flair_stats.html')
 
 @app.route('/_flair_list')
-def add_numbers():
+def flair_list():
+    print "request made"
     flair = db.session.query(Flair).order_by(Flair.id.desc()).first()
     flairjson = json.loads(flair.jsondata.decode('string-escape').strip('"'))
     #flairjson = json.loads('[{"jflair": {"color": "rgba(159,234,231)", "number":1}}]')
