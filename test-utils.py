@@ -17,9 +17,9 @@ class UtilsTest(unittest.TestCase):
     #	utils.get_team_subreddits(3)
 
 
-    def test_get_schedule(self):
-      	schedule =utils.get_schedule(3)
-        print schedule
+    #def test_get_schedule(self):
+    #  	schedule =utils.get_schedule(3)
+    #    print schedule
     
     #def test_add_players(self):
     #    utils.add_players()
@@ -51,6 +51,8 @@ class UtilsTest(unittest.TestCase):
     #	standings = utils.get_standings_nba()
     #	print standings
 
+    def test_update_flair(self):
+        utils.update_flair("catmoon","[MIA] Hassan Whiteside","Heat1")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,3 +1,3 @@
 import utils
 
-utils.update_flair()
+utils.update_flair_list()

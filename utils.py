@@ -629,7 +629,7 @@ def get_flair_count():
     return flair_count
 
 
-def update_flair():
+def update_flair_list():
     flair_list = get_flair_count()
     flair_json = json.dumps([dict(jflair=lflair) for lflair in flair_list])
     flair = Flair(jsondata=json.dumps(flair_json), date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
