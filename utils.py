@@ -21,6 +21,7 @@ from operator import itemgetter
 import praw
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import OAuth2Util
 
 from whoosh.qparser import QueryParser
 from whoosh.query import FuzzyTerm
@@ -121,9 +122,13 @@ def get_schedule(var_length):
     
     """
     #Initiate PRAW
-    r = praw.Reddit(user_agent='NBA_MOD using praw')
+    r = praw.Reddit(user_agent='/u/NBA_MOD for /r/NBA')
     #Log in to Reddit using 
-    r.login(os.environ['USER'],os.environ['PASS'])
+    
+    o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="conf.ini")
+    #r.login(os.environ['USER'],os.environ['PASS'])
+    
+
     #Get the schedule from the wiki
     schedule_md = r.get_subreddit('NBA').get_wiki_page('schedule_2015-2016').content_md
     #Split the schedule by individual lines. Each line is a different game
@@ -219,7 +224,8 @@ def create_scorebar(all_games):
     #Initialize PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Login using the NBAModBot password
-    r.login(os.environ['USER'],os.environ['PASS'])
+    #r.login(os.environ['USER'],os.environ['PASS'])
+    o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="conf.ini")
     #Get top 100 submissions from /r/NBA. In high traffic this may need to be increased.
     submissions = r.get_subreddit('nba').get_hot(limit=100)
     #Create lists
@@ -280,7 +286,8 @@ def create_game_thread_bar(all_games):
     #Initialize PRAW
     r = praw.Reddit(user_agent='NBA_MOD using praw')
     #Login using the NBAModBot password
-    r.login(os.environ['USER'],os.environ['PASS'])
+    #r.login(os.environ['USER'],os.environ['PASS'])
+    o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="conf.ini")
     #Get top 100 submissions from /r/NBA. In high traffic this may need to be increased.
     submissions = r.get_subreddit('nba').get_hot(limit=100)
     #Create lists
@@ -454,7 +461,8 @@ def update_flair(user,flair_text,flair_class):
 
     """
     r = praw.Reddit(user_agent='NBA_MOD using praw')
-    r.login(os.environ['USER'],os.environ['PASS'])
+    #r.login(os.environ['USER'],os.environ['PASS'])
+    o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="conf.ini")
     success = r.get_subreddit('nba').set_flair(user,flair_text,flair_class)
     return success
 
@@ -600,7 +608,8 @@ def get_team_from_flair_class(css):
 def get_flair_count():
 
     r = praw.Reddit('/u/catmoon using praw')
-    r.login(os.environ['USER'],os.environ['PASS'])
+    #r.login(os.environ['USER'],os.environ['PASS'])
+    o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="conf.ini")
     subreddit = r.get_subreddit('nba')
     flairlist = subreddit.get_flair_list(limit=None)
     flair_count = []

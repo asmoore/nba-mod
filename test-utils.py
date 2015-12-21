@@ -13,13 +13,13 @@ import unittest
 import utils
 
 class UtilsTest(unittest.TestCase):
-    def test_get_team_subreddits(self):
-    	utils.get_team_subreddits(3)
+    #def test_get_team_subreddits(self):
+    #	utils.get_team_subreddits(3)
 
 
-    #def test_get_schedule(self):
-    #  	schedule =utils.get_schedule(3)
-    #    print schedule
+    def test_get_schedule(self):
+      	schedule =utils.get_schedule(3)
+        print schedule
     
     #def test_add_players(self):
     #    utils.add_players()
