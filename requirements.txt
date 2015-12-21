@@ -6,4 +6,4 @@ sqlalchemy==1.0.4
 whoosh==2.7.0
 Flask-SQLAlchemy==1.0
 psycopg2==2.6
-OAuth2Util==0.3.3
+praw-oauth2util==0.3.3
