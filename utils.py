@@ -113,7 +113,7 @@ def get_team_subreddits(var_length):
         name = name.replace('t3_', '')
         subreddit = story['data']['subreddit'].lower()
         permalink = story['data']['permalink']
-        top_links = top_links+'|'+str(counter+1)+' ['+title+'](/r/'+subreddit+'/comments/'+name+')|\n'
+        top_links = top_links+'|'+str(counter+1)+' ['+title+'](https://np.reddit.com/r/'+subreddit+'/comments/'+name+')|\n'
     return top_links
 
 
