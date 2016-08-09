@@ -7,7 +7,7 @@ def get_wiki_page(page):
     """Gets content from the wiki
 
     """
-    r = praw.Reddit(user_agent='rolympicsbot using praw')
+    r = praw.Reddit(user_agent='rolympics using praw')
     o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="olyconf.ini")
     threads = r.get_subreddit('olympics').get_wiki_page(page).content_md
     return threads
@@ -29,7 +29,7 @@ def set_sidebar_medals():
 
 	"""
 	medals_table = fetch_medals()
-	r = praw.Reddit(user_agent='rolympicsbot using praw')
+	r = praw.Reddit(user_agent='rolympics using praw')
 	o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="olyconf.ini")
 	medals_wiki = r.get_subreddit('olympics').get_wiki_page('sidebar_medals')
 	medals_wiki.edit(medals_table)
@@ -44,7 +44,7 @@ def update_sidebar():
     events = get_wiki_page("sidebar_threads")
     template = template.replace("{{ActiveThreads}}",events)
     template = template.replace("{{Medals}}",medals)
-    r = praw.Reddit(user_agent='rolympicsbot using praw')
+    r = praw.Reddit(user_agent='rolympics using praw')
     o = OAuth2Util.OAuth2Util(r, print_log=True, configfile="olyconf.ini")
     settings = r.get_subreddit("olympics").get_settings()
     settings['description'] = template 
