@@ -38,6 +38,7 @@ def update_sidebar():
     """updates the sidebar
 
     """
+    set_sidebar_medals()
     template = get_wiki_page("sidebar_template")
     medals = get_wiki_page("sidebar_medals")
     events = get_wiki_page("sidebar_threads")
