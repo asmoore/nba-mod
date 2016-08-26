@@ -85,6 +85,7 @@ def add_players():
         for player in players:
             column = player.getchildren() 
             name = column[1].text_content()
+            fro = column[2].text_content()
             to = column[3].text_content()
             if name == "Player" or to == "Per Game":
                 pass
@@ -92,6 +93,9 @@ def add_players():
                 if team == "OKC":
                     if int(to) < int(2008):
                         team_name = "SEA"
+                    elif int(fro) < int(2009):
+                        writer.add_document(player_name=unicode(str(name)), team_name=unicode(str("SEA")))
+                        team_name = "OKC"
                     else:
                         team_name = "OKC"
                 else:
