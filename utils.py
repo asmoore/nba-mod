@@ -96,7 +96,7 @@ def add_players():
                         team_name = "OKC"
                 else:
                     pass
-                writer.add_document(player_name=unicode(player), team_name=unicode(team_name))
+                writer.add_document(player_name=unicode(str(name)), team_name=unicode(str(team_name)))
     writer.commit()
 
 

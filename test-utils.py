@@ -28,9 +28,9 @@ class UtilsTest(unittest.TestCase):
     #    players = utils.get_players()
     #    print players
 
-    #def test_fetch_search(self):
-    #    results = utils.fetch_search("Wade")
-    #    print results
+    def test_fetch_search(self):
+        results = utils.fetch_search("Wade","MIA")
+        print results
 
     #def test_add_teams(self):
     #    teams = utils.add_teams()
@@ -51,8 +51,8 @@ class UtilsTest(unittest.TestCase):
     #	standings = utils.get_standings_nba()
     #	print standings
 
-    def test_update_flair(self):
-        utils.update_flair("catmoon","[MIA] Hassan Whiteside","Heat1")
+    #def test_update_flair(self):
+    #    utils.update_flair("catmoon","[MIA] Hassan Whiteside","Heat1")
 
 if __name__ == '__main__':
     unittest.main()
