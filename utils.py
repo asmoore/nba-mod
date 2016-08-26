@@ -76,9 +76,27 @@ def add_players():
         url = 'http://www.basketball-reference.com/teams/' + team + '/players.html'
         page = requests.get(url)
         tree = html.fromstring(page.text)
-        players = tree.xpath('//tr/td/a/text()')
+        #players = tree.xpath('//tr/td/a/text()')
+        #for player in players:
+        #    to = players.xpath('//tr/td[4]/text()') 
+        #    print "To: " + str(to)
+        team_name = team
+        players = tree.xpath('//tr')
         for player in players:
-            writer.add_document(player_name=unicode(player), team_name=unicode(team))
+            column = player.getchildren() 
+            name = column[1].text_content()
+            to = column[3].text_content()
+            if name == "Player" or to == "Per Game":
+                pass
+            else:
+                if team == "OKC":
+                    if int(to) < int(2008):
+                        team_name = "SEA"
+                    else:
+                        team_name = "OKC"
+                else:
+                    pass
+                writer.add_document(player_name=unicode(player), team_name=unicode(team_name))
     writer.commit()
 
 
