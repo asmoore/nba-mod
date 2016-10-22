@@ -17,6 +17,8 @@ import urllib
 from lxml import html
 import requests
 from operator import itemgetter
+#from datetime import datetime
+import pytz
 
 import praw
 from sqlalchemy import create_engine
@@ -176,6 +178,33 @@ def get_schedule(var_length):
                     schedule = schedule + re.sub(date.group(),datetime.datetime.strptime(date.group(), '%m/%d/%Y').strftime('%b. %d'),game) + "\n"
     #Returns as a string
     return schedule
+
+def get_schedule_2(var_length):
+    """Return a markdown table of games.
+    
+    """
+    schedule = "|Date|Away|Home|Time (ET)|Nat TV|\n|:---|:---|:---|:---|:---|\n"
+    today = datetime.datetime.now(pytz.timezone('US/Pacific'))
+    for i in range(0,var_length):
+        first_for_day = True
+        date = today + datetime.timedelta(days=i)
+        response = urllib2.urlopen('http://data.nba.com/5s/json/cms/noseason/scoreboard/'+date.strftime("%Y%m%d")+'/games.json')
+        jdata = json.load(response)
+        games = jdata['sports_content']['games']['game']
+        for game in games:
+            away = game['visitor']['abbreviation']
+            home = game['home']['abbreviation']
+            time24 = game['time']
+            time = datetime.time(hour=int(time24[0:2]), minute=int(time24[2:4])).strftime('%I:%M %p')
+            broadcaster = "[](/" + game['broadcasters']['tv']['broadcaster'][0]['display_name'] + ")"
+            if first_for_day:
+                line = "|" + date.strftime('%b. %d') + "|[](/" + away + ")|[](/" + home + ")|" + time + "|" + broadcaster + "\n"
+            else:
+                line = "| |[](/" + away + ")|[](/" + home + ")|" + time + "|" + broadcaster + "\n"
+            schedule = schedule + line
+            first_for_day = False
+    return schedule
+
 
 def get_schedule_nba():
     """Gets the schedule from nba.com
