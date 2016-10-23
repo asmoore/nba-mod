@@ -47,16 +47,16 @@ class UtilsTest(unittest.TestCase):
     #	utils.get_game_threads()
 
 
-    #def test_get_standings_nba(self):
-    #	standings = utils.get_standings_nba()
-    #	print standings
+    def test_get_standings_nba(self):
+    	standings = utils.get_standings_nba()
+    	print standings
 
     #def test_update_flair(self):
     #    utils.update_flair("catmoon","[MIA] Hassan Whiteside","Heat1")
 
-    def test_get_schedule_2(self):
-        schedule = utils.get_schedule_2(3)
-        print schedule
+    #def test_get_schedule_2(self):
+    #    schedule = utils.get_schedule_2(3)
+    #    print schedule
 
 if __name__ == '__main__':
     unittest.main()
