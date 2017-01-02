@@ -21,8 +21,8 @@ class UtilsTest(unittest.TestCase):
     #  	schedule =utils.get_schedule(3)
     #    print schedule
     
-    #def test_add_players(self):
-    #    utils.add_players()
+    def test_add_players(self):
+        utils.add_players()
 
     #def test_get_players(self):
     #    players = utils.get_players()
