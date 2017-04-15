@@ -494,25 +494,61 @@ def get_playoff_table():
     round_3_2 = ""
     round_4_1 = ""
 
-
     #check if round 2 is started    
     if isinstance(round_data[46], str):
-        print "round 2 started"
-        #round_2_1 = ""
-        #round_2_2 = ""
-        #round_2_3 = ""
-        #round_2_4 = ""
+        if int(round_data[50])> int(round_data[51]):
+            round_2_1 = round_data[20].split(" ")[1] + " " + round_data[50] + "-" + round_data[51]
+        elif int(round_data[51])> int(round_data[50]):
+            round_2_1 = round_data[21].split(" ")[1] + " " + round_data[50] + "-" + round_data[51]
+        else:
+            round_2_1 = "TIED " + round_data[36] + "-" + round_data[37]
+
+        if int(round_data[52])> int(round_data[53]):
+            round_2_1 = round_data[22].split(" ")[1] + " " + round_data[52] + "-" + round_data[53]
+        elif int(round_data[53])> int(round_data[52]):
+            round_2_1 = round_data[23].split(" ")[1] + " " + round_data[52] + "-" + round_data[53]
+        else:
+            round_2_1 = "TIED " + round_data[52] + "-" + round_data[53]
+
+        if int(round_data[46])> int(round_data[47]):
+            round_2_1 = round_data[16].split(" ")[1] + " " + round_data[46] + "-" + round_data[47]
+        elif int(round_data[47])> int(round_data[46]):
+            round_2_1 = round_data[17].split(" ")[1] + " " + round_data[46] + "-" + round_data[47]
+        else:
+            round_2_1 = "TIED " + round_data[46] + "-" + round_data[47]
+
+        if int(round_data[48])> int(round_data[49]):
+            round_2_1 = round_data[18].split(" ")[1] + " " + round_data[48] + "-" + round_data[49]
+        elif int(round_data[49])> int(round_data[48]):
+            round_2_1 = round_data[19].split(" ")[1] + " " + round_data[48] + "-" + round_data[49]
+        else:
+            round_2_1 = "TIED " + round_data[48] + "-" + round_data[49]
     
     #check if round 3 is started    
     if isinstance(round_data[54], str):
-        print "round 3 started"
-        #round_3_1 = ""
-        #round_1_2 = ""
+        if int(round_data[56])> int(round_data[57]):
+            round_3_1 = round_data[26].split(" ")[1] + " " + round_data[56] + "-" + round_data[57]
+        elif int(round_data[57])> int(round_data[56]):
+            round_3_1 = round_data[27].split(" ")[1] + " " + round_data[56] + "-" + round_data[57]
+        else:
+            round_3_1 = "TIED " + round_data[56] + "-" + round_data[57]
+
+        if int(round_data[54])> int(round_data[55]):
+            round_3_2 = round_data[24].split(" ")[1] + " " + round_data[54] + "-" + round_data[55]
+        elif int(round_data[55])> int(round_data[54]):
+            round_3_2 = round_data[25].split(" ")[1] + " " + round_data[54] + "-" + round_data[55]
+        else:
+            round_3_2 = "TIED " + round_data[54] + "-" + round_data[55]
 
     #check if round 4 is started    
     if isinstance(round_data[59], str):
         print "round 4 started"
-        #round_4_1 = ""
+        if int(round_data[59])> int(round_data[58]):
+            round_2_1 = round_data[29].split(" ")[1] + " " + round_data[36] + "-" + round_data[37]
+        elif int(round_data[58])> int(round_data[59]):
+            round_2_1 = round_data[28].split(" ")[1] + " " + round_data[36] + "-" + round_data[37]
+        else:
+            round_2_1 = "TIED " + round_data[59] + "-" + round_data[58]
 
     #row 1
     playoff_table += "| " + round_data[8] + " | " + round_1_1 + "||||" + round_1_5 + " | " + round_data[0] + " |\n"
