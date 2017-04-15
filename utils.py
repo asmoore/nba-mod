@@ -14,7 +14,7 @@ import os
 import re
 import urllib2
 import urllib
-from lxml import html
+from lxml import html, etree
 import requests
 from operator import itemgetter
 #from datetime import datetime
@@ -116,7 +116,7 @@ def get_team_subreddits(var_length):
         
     """
     #Define the URL with var_length number of posts.
-    url = "http://www.reddit.com/r/nyknicks+sixers+bostonceltics+gonets+torontoraptors+chicagobulls+mkebucks+clevelandcavs+indianapacers+detroitpistons+heat+atlantahawks+orlandomagic+charlottehornets+washingtonwizards+timberwolves+thunder+ripcity+utahjazz+denvernuggets+laclippers+kings+suns+lakers+nbaspurs+mavericks+memphisgrizzlies+rockets+hornets/.json?limit=" + str(var_length)
+    url = "http://www.reddit.com/r/nyknicks+sixers+bostonceltics+gonets+torontoraptors+chicagobulls+mkebucks+clevelandcavs+pacers+detroitpistons+heat+atlantahawks+orlandomagic+charlottehornets+washingtonwizards+timberwolves+thunder+ripcity+utahjazz+denvernuggets+laclippers+kings+suns+lakers+nbaspurs+mavericks+memphisgrizzlies+rockets+hornets/.json?limit=" + str(var_length)
     #Define headers for Reddit API request.
     headers = { 'User-Agent' : '/r/nba subreddits /u/NBA_Mod' }
     #Request the URL.
@@ -309,7 +309,6 @@ def create_scorebar(all_games):
     
     return scorebar
 
-
 def create_game_thread_bar(all_games):
     """Return a string list of current games.
     
@@ -373,6 +372,195 @@ def create_game_thread_bar(all_games):
     scorebar = city_names_to_code(scorebar)
 
     return scorebar
+
+
+def get_playoff_table():
+    """Return playoff from ESPN
+
+    """
+    playoff_table = "|RD1|RD2|WCF|FIN|ECF|RD2|RD1|\n|:---:|:---:|:---:|:---:|:---:|:---:|:---:|\n"
+
+    url = "http://www.espn.com/nba/bracket"
+    page = requests.get(url)
+    tree = html.fromstring(page.text)
+    bracket_table = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div')
+    round_1 = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[4]/dl/dt')
+    round_2 = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[5]/dl/dt')
+    round_3 = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[6]/dl/dt')
+    round_4 = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[7]/dl/dt')
+    round_1_series = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[4]/dl/dd')
+    round_2_series = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[5]/dl/dd')
+    round_3_series = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[6]/dl/dd')
+    round_4_series = tree.xpath('//*[@id="my-teams-table"]/div[1]/div/div[7]/dl/dd')
+
+    #get round_1
+    round_data = []
+    for this_round in [round_1, round_2,round_3, round_4]:
+        for game in this_round:
+            try:
+                game_text = game.text_content()
+                round_data.append("(" + game_text.split("(")[1])
+                round_data.append("(" + game_text.split("(")[2])
+            except:
+                round_data.append("")
+                round_data.append("")
+
+    #get series score
+    round_series_data_array = []
+    for this_round in [round_1_series, round_2_series,round_3_series, round_4_series]:
+        for game_series in this_round:
+            try:
+                game_score = game_series.text_content()
+                round_data.append(game_score[0:1])
+                round_data.append(game_score[len(game_score)-1:len(game_score)])                
+            except:
+                round_data.append("")
+                round_data.append("")
+
+    #for k,i in enumerate(round_data):
+    #    print k, i
+    #print len(round_data)
+    
+    round_1_1 = ""
+    if int(round_data[38])> int(round_data[39]):
+        round_1_1 = round_data[8].split(" ")[1] + " " + round_data[38] + " " + round_data[39]
+    elif int(round_data[40])> int(round_data[39]):
+        round_1_1 = round_data[9].split(" ")[1] + " " + round_data[38] + " " + round_data[39]
+    else:
+        round_1_1 = "TIED " + round_data[38] + " " + round_data[39]
+    
+
+    round_1_2 = ""
+    if int(round_data[40])> int(round_data[41]):
+        round_1_2 = round_data[10].split(" ")[1] + " " + round_data[40] + "-" + round_data[41]
+    elif int(round_data[41])> int(round_data[40]):
+        round_1_2 = round_data[11].split(" ")[1] + " " + round_data[40] + "-" + round_data[41]
+    else:
+        round_1_2 = "TIED " + round_data[40] + "-" + round_data[41]
+    
+    round_1_3 = ""
+    if int(round_data[42])> int(round_data[43]):
+        round_1_3 = round_data[12].split(" ")[1] + " " + round_data[42] + "-" + round_data[43]
+    elif int(round_data[43])> int(round_data[42]):
+        round_1_3 = round_data[13].split(" ")[1] + " " + round_data[42] + "-" + round_data[43]
+    else:
+        round_1_3 = "TIED " + round_data[42] + "-" + round_data[43]
+
+    round_1_4 = ""
+    if int(round_data[44])> int(round_data[45]):
+        round_1_4 = round_data[14].split(" ")[1] + " " + round_data[44] + "-" + round_data[45]
+    elif int(round_data[45])> int(round_data[44]):
+        round_1_4 = round_data[15].split(" ")[1] + " " + round_data[44] + "-" + round_data[45]
+    else:
+        round_1_4 = "TIED " + round_data[44] + "-" + round_data[45]
+        
+    round_1_5 = ""
+    if int(round_data[30])> int(round_data[31]):
+        round_1_5 = round_data[0].split(" ")[1] + " " + round_data[30] + "-" + round_data[31]
+    elif int(round_data[31])> int(round_data[30]):
+        round_1_5 = round_data[1].split(" ")[1] + " " + round_data[30] + "-" + round_data[31]
+    else:
+        round_1_5 = "TIED " + round_data[30] + "-" + round_data[31]
+        
+    round_1_6 = ""
+    if int(round_data[32])> int(round_data[33]):
+        round_1_6 = round_data[2].split(" ")[1] + " " + round_data[32] + "-" + round_data[33]
+    elif int(round_data[33])> int(round_data[32]):
+        round_1_6 = round_data[3].split(" ")[1] + " " + round_data[32] + "-" + round_data[33]
+    else:
+        round_1_6 = "TIED " + round_data[32] + "-" + round_data[33]
+        
+    round_1_7 = ""
+    if int(round_data[34])> int(round_data[35]):
+        round_1_7 = round_data[4].split(" ")[1] + " " + round_data[34] + "-" + round_data[35]
+    elif int(round_data[35])> int(round_data[34]):
+        round_1_7 = round_data[5].split(" ")[1] + " " + round_data[34] + "-" + round_data[35]
+    else:
+        round_1_7 = "TIED " + round_data[34] + "-" + round_data[35]
+        
+    round_1_8 = ""
+    if int(round_data[36])> int(round_data[37]):
+        round_1_8 = round_data[6].split(" ")[1] + " " + round_data[36] + "-" + round_data[37]
+    elif int(round_data[37])> int(round_data[36]):
+        round_1_8 = round_data[7].split(" ")[1] + " " + round_data[36] + "-" + round_data[37]
+    else:
+        round_1_8 = "TIED " + round_data[36] + "-" + round_data[37]
+    
+    round_2_1 = ""
+    round_2_2 = ""
+    round_2_3 = ""
+    round_2_4 = ""
+    round_3_1 = ""
+    round_3_2 = ""
+    round_4_1 = ""
+
+
+    #check if round 2 is started    
+    if isinstance(round_data[46], str):
+        print "round 2 started"
+        #round_2_1 = ""
+        #round_2_2 = ""
+        #round_2_3 = ""
+        #round_2_4 = ""
+    
+    #check if round 3 is started    
+    if isinstance(round_data[54], str):
+        print "round 3 started"
+        #round_3_1 = ""
+        #round_1_2 = ""
+
+    #check if round 4 is started    
+    if isinstance(round_data[59], str):
+        print "round 4 started"
+        #round_4_1 = ""
+
+    #row 1
+    playoff_table += "| " + round_data[8] + " | " + round_1_1 + "||||" + round_1_5 + " | " + round_data[0] + " |\n"
+    #row 2
+    playoff_table += "| " + round_data[9] + " ||" + round_2_1 + "||" + round_2_3 + "|| " + round_data[1] + " |\n"
+    #row 3
+    playoff_table += "||||||||\n"
+    #row 4
+    playoff_table += "| " + round_data[10] + " | " + round_1_2 + "||" + round_3_1 + "||" + round_1_6 + " | " + round_data[2] + " |\n"
+    #row 5
+    playoff_table += "| " + round_data[11] + " |||"+ round_4_1 +"||| " + round_data[3] + " |\n"
+    #row 6
+    playoff_table += "||||||||\n"
+    #row 7
+    playoff_table += "| " + round_data[12] + " | " + round_1_3 + "||" + round_3_2 + "||" + round_1_7 + " | " + round_data[4] + " |\n"
+    #row 8
+    playoff_table += "| " + round_data[13] + " ||" + round_2_2 + "||" + round_2_4 + "||" + round_data[5] + " |\n"
+    #row 9
+    playoff_table += "||||||||\n"
+    #row 10
+    playoff_table += "| " + round_data[14] + " | " + round_1_4 + "||||" + round_1_8 + " | " + round_data[6] + " |\n"
+    #row 11
+    playoff_table += "| " + round_data[15] + " ||" + round_2_4 + "|||| " + round_data[7] + " |\n"
+
+    #List of NBA city names
+    city_names = ['Boston','Brooklyn','New York','Philadelphia','Toronto',
+                  'Chicago','Cleveland','Detroit','Indiana','Milwaukee',
+                  'Atlanta','Charlotte','Miami','Orlando','Washington',
+                  'Golden State','Golden St','LA','Los Angeles Clippers',
+                  'Los Angeles Lakers','Phoenix','Sacramento','Dallas','Houston',
+                  'Memphis','New Orleans','San Antonio','Denver','Minnesota',
+                  'Oklahoma City','Portland','Philadelphia','Utah'
+                  ]
+    #Corresponding list of hrefs
+    hrefs = ['[](/BOS)','[](/BKN)','[](/NYK)','[](/PHI)','[](/TOR)',
+             '[](/CHI)','[](/CLE)','[](/DET)','[](/IND)','[](/MIL)',
+             '[](/ATL)','[](/CHA)','[](/MIA)','[](/ORL)','[](/WAS)',
+             '[](/GSW)','[](/GSW)','[](/LAC)','[](/LAC)',
+             '[](/LAL)','[](/PHX)','[](/SAC)','[](/DAL)','[](/HOU)',
+             '[](/MEM)','[](/NOP)','[](/SAS)','[](/DEN)','[](/MIN)',
+             '[](/OKC)','[](/POR)','[](/PHI)','[](/UTA)'
+             ]
+
+    for city,href in zip(city_names,hrefs):
+        #Replace all of the city names with hrefs
+        playoff_table = playoff_table.replace(city,href)
+    
+    return playoff_table
 
 
 def get_standings_nba():
@@ -461,7 +649,7 @@ def city_names_to_code(var_string):
                   'Golden State','Golden St','LA Clippers','LA Lakers','Los Angeles Clippers',
                   'Los Angeles Lakers','Phoenix','Sacramento','Dallas','Houston',
                   'Memphis','New Orleans','San Antonio','Denver','Minnesota',
-                  'Oklahoma City','Portland','Philadelphia','Utah'
+                  'Oklahoma City','Portland','Philadelphia','Utah', 
                   ]
     #Corresponding list of hrefs
     hrefs = ['**BOS**','**BKN**','**NYK**','**PHI**','**TOR**',
@@ -470,7 +658,7 @@ def city_names_to_code(var_string):
              '**GSW**','**GSW**','**LAC**','**LAL**','**LAC**',
              '**LAL**','**PHX**','**SAC**','**DAL**','**HOU**',
              '**MEM**','**NOP**','**SAS**','**DEN**','**MIN**',
-             '**OKC**','**POR**','**PHI**','**UTA**'
+             '**OKC**','**POR**','**PHI**','**UTA**',
              ]
     #Go through the lists
     for city,href in zip(city_names,hrefs):
