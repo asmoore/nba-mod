@@ -580,7 +580,7 @@ def get_playoff_table():
                   'Golden State','Golden St','LA','Los Angeles Clippers',
                   'Los Angeles Lakers','Phoenix','Sacramento','Dallas','Houston',
                   'Memphis','New Orleans','San Antonio','Denver','Minnesota',
-                  'Oklahoma City','Portland','Philadelphia','Utah'
+                  'Oklahoma City','Portland','Philadelphia','Utah', 'San'
                   ]
     #Corresponding list of hrefs
     hrefs = ['[](/BOS)','[](/BKN)','[](/NYK)','[](/PHI)','[](/TOR)',
@@ -589,7 +589,7 @@ def get_playoff_table():
              '[](/GSW)','[](/GSW)','[](/LAC)','[](/LAC)',
              '[](/LAL)','[](/PHX)','[](/SAC)','[](/DAL)','[](/HOU)',
              '[](/MEM)','[](/NOP)','[](/SAS)','[](/DEN)','[](/MIN)',
-             '[](/OKC)','[](/POR)','[](/PHI)','[](/UTA)'
+             '[](/OKC)','[](/POR)','[](/PHI)','[](/UTA)', '[](/SAS)'
              ]
 
     for city,href in zip(city_names,hrefs):
